@@ -10,10 +10,14 @@ import UIKit
 
 class DownloadCell: UITableViewCell {
 
-    @IBOutlet private weak var UrlLabel: UILabel!
+    @IBOutlet private weak var urlLabel: UILabel!
     
     @IBAction private func clickDownload(_ sender: Any) {
         
+    }
+    
+    func initCell(url: String) {
+        urlLabel.text = url
     }
     
 }

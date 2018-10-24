@@ -16,4 +16,8 @@ class ProcessCell: UITableViewCell {
         
     }
     
+    func initCell(url: String) {
+        urlLabel.text = url
+    }
+    
 }

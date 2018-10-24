@@ -50,7 +50,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="resultCountLabel" destination="qw4-1W-ofN" id="Qp5-90-R6K"/>
+                <outlet property="barcodeCountLabel" destination="qw4-1W-ofN" id="Qp5-90-R6K"/>
             </connections>
             <point key="canvasLocation" x="132.80000000000001" y="169.56521739130437"/>
         </tableViewCell>

@@ -10,10 +10,14 @@ import UIKit
 
 class ResultCell: UITableViewCell {
 
-    @IBOutlet weak var resultCountLabel: UILabel!
+    @IBOutlet private weak var barcodeCountLabel: UILabel!
     
-    @IBAction func clickShowResult(_ sender: Any) {
+    @IBAction private func clickShowResult(_ sender: Any) {
         
+    }
+    
+    func initCell(barcodeCount: String) {
+        barcodeCountLabel.text = barcodeCount
     }
     
 }
