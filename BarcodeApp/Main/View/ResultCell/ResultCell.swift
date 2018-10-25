@@ -16,8 +16,8 @@ class ResultCell: UITableViewCell {
         
     }
     
-    func initCell(barcodeCount: String) {
-        barcodeCountLabel.text = barcodeCount
+    func initCell(barcodeCount: Int) {
+        barcodeCountLabel.text = String(barcodeCount)
     }
     
 }
