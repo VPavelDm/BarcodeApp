@@ -18,6 +18,7 @@
 		10F1A73A21809BFD002A3A3B /* ProcessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F1A73821809BFD002A3A3B /* ProcessCell.xib */; };
 		10F1A73E21809CED002A3A3B /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F1A73C21809CED002A3A3B /* ResultCell.swift */; };
 		10F1A73F21809CED002A3A3B /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F1A73D21809CED002A3A3B /* ResultCell.xib */; };
+		3F0EE0FF5B86F0D953CDF20F /* Pods_BarcodeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 162A4E7EA88E6C54C88629D6 /* Pods_BarcodeApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,9 @@
 		10F1A73821809BFD002A3A3B /* ProcessCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProcessCell.xib; sourceTree = "<group>"; };
 		10F1A73C21809CED002A3A3B /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
 		10F1A73D21809CED002A3A3B /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
+		162A4E7EA88E6C54C88629D6 /* Pods_BarcodeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BarcodeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DD251E4D4714201B39AF02C /* Pods-BarcodeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarcodeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarcodeApp/Pods-BarcodeApp.release.xcconfig"; sourceTree = "<group>"; };
+		75004EBFCF4C8DD4E1681880 /* Pods-BarcodeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarcodeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarcodeApp/Pods-BarcodeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0EE0FF5B86F0D953CDF20F /* Pods_BarcodeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +57,8 @@
 			children = (
 				10F1A71A21808A88002A3A3B /* BarcodeApp */,
 				10F1A71921808A88002A3A3B /* Products */,
+				C74F5C0E523596FD34168F43 /* Pods */,
+				8987BC5F09FA24E060B133E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +117,23 @@
 			path = ResultCell;
 			sourceTree = "<group>";
 		};
+		8987BC5F09FA24E060B133E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				162A4E7EA88E6C54C88629D6 /* Pods_BarcodeApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C74F5C0E523596FD34168F43 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75004EBFCF4C8DD4E1681880 /* Pods-BarcodeApp.debug.xcconfig */,
+				4DD251E4D4714201B39AF02C /* Pods-BarcodeApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FED850FDD9D6F7AC1914230F /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10F1A72A21808A89002A3A3B /* Build configuration list for PBXNativeTarget "BarcodeApp" */;
 			buildPhases = (
+				31063ED464D09FDA881777DA /* [CP] Check Pods Manifest.lock */,
 				10F1A71421808A88002A3A3B /* Sources */,
 				10F1A71521808A88002A3A3B /* Frameworks */,
 				10F1A71621808A88002A3A3B /* Resources */,
+				61C9610C437A9C4C1C2CD37D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,6 +224,55 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		31063ED464D09FDA881777DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BarcodeApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61C9610C437A9C4C1C2CD37D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BarcodeApp/Pods-BarcodeApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarcodeApp/Pods-BarcodeApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		10F1A71421808A88002A3A3B /* Sources */ = {
@@ -344,6 +419,7 @@
 		};
 		10F1A72B21808A89002A3A3B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75004EBFCF4C8DD4E1681880 /* Pods-BarcodeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -362,6 +438,7 @@
 		};
 		10F1A72C21808A89002A3A3B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DD251E4D4714201B39AF02C /* Pods-BarcodeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
