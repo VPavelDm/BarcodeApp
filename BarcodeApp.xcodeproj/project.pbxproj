@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1013D8D72183297200C2581C /* Urls.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1013D8D62183297200C2581C /* Urls.txt */; };
+		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
 		107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1D82181D76E001D66D8 /* UITableViewCell.swift */; };
 		107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DB2181D820001D66D8 /* MainViewModel.swift */; };
 		107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1013D8D62183297200C2581C /* Urls.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Urls.txt; sourceTree = "<group>"; };
+		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		107CA1D82181D76E001D66D8 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		107CA1DB2181D820001D66D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				107CA1D82181D76E001D66D8 /* UITableViewCell.swift */,
+				1013D8D8218329FC00C2581C /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				10F1A71B21808A88002A3A3B /* AppDelegate.swift */,
 				10F1A72221808A89002A3A3B /* Assets.xcassets */,
 				10F1A72421808A89002A3A3B /* LaunchScreen.storyboard */,
+				1013D8D62183297200C2581C /* Urls.txt */,
 			);
 			path = "Support File";
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 				10F1A73A21809BFD002A3A3B /* ProcessCell.xib in Resources */,
 				10F1A73F21809CED002A3A3B /* ResultCell.xib in Resources */,
 				10F1A72321808A89002A3A3B /* Assets.xcassets in Resources */,
+				1013D8D72183297200C2581C /* Urls.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */,
+				1013D8D9218329FC00C2581C /* String.swift in Sources */,
 				107CA1E12181DAED001D66D8 /* Image.swift in Sources */,
 				10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */,
 				10F1A731218098DA002A3A3B /* MainViewController.swift in Sources */,
