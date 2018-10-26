@@ -12,7 +12,13 @@ import RxSwift
 class ImageProvider {
     
     func getData() -> Observable<[Image]> {
-        return Observable.from(optional: images)
+        return Observable.create { [weak self] observer in
+            defer { observer.onCompleted() }
+            if let images = self?.images {
+                observer.onNext(images)
+            }            
+            return Disposables.create()
+        }
     }
     
     private let images: [Image] = [

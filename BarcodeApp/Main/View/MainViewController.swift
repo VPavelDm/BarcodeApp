@@ -17,12 +17,16 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         registerCells()
-        subscribeOnImageUpdate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadImages()
     }
     
     private var cellStates: [Int:CellState] = [:]
     private let viewModel = MainViewModel()
-    private let disposedBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     private func registerCells() {
         tableView.register(UINib(nibName: DownloadCell.identifier, bundle: nil), forCellReuseIdentifier: DownloadCell.identifier)
@@ -30,32 +34,21 @@ class MainViewController: UIViewController {
         tableView.register(UINib(nibName: ResultCell.identifier, bundle: nil), forCellReuseIdentifier: ResultCell.identifier)
     }
     
-    private func subscribeOnImageUpdate() {
-        viewModel.notLoadedObservable.subscribe { [weak self] index in
-            guard let `self` = self, let index = index.element else { return }
-            updateCell(by: index, with: .notLoaded)
-            }.disposed(by: disposedBag)
-        
-        viewModel.loadedObservable.subscribe { [weak self] index in
-            guard let `self` = self, let index = index.element else { return }
-            updateCell(by: index, with: .loaded)
-            }.disposed(by: disposedBag)
-        
-        viewModel.processedObservable.subscribe { [weak self] index in
-            guard let `self` = self, let index = index.element else { return }
-            updateCell(by: index, with: .processed)
-            }.disposed(by: disposedBag)
-        
-        func updateCell(by index: Int, with state: CellState) {
-            let indexPath = IndexPath(row: index, section: 0)
-            if let _ = cellStates[index] {
-                cellStates[index] = state
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            } else {
-                cellStates[index] = state
-                tableView.insertRows(at: [indexPath], with: .automatic)
-            }
+    private func loadImages() {
+        func updateCell(indexes: Event<[Int]>) {
+            guard let _ = indexes.element else { return }
+            tableView.reloadData()
         }
+        let notLoadedObservable = viewModel.notLoadedObservable.do(onNext: { [weak self] in self?.cellStates[$0] = .notLoaded })
+        let loadedObservable = viewModel.loadedObservable.do(onNext: { [weak self] in self?.cellStates[$0] = .loaded })
+        let processedObservable = viewModel.processedObservable.do(onNext: { [weak self] in self?.cellStates[$0] = .processed })
+        
+        Observable
+            .concat(notLoadedObservable, loadedObservable, processedObservable)
+            .filter{ $0 >= 0 }
+            .toArray()
+            .subscribe(updateCell)
+        .disposed(by: disposeBag)
     }
 
 }
