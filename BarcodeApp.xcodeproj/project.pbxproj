@@ -11,7 +11,7 @@
 		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
 		107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1D82181D76E001D66D8 /* UITableViewCell.swift */; };
 		107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DB2181D820001D66D8 /* MainViewModel.swift */; };
-		107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */; };
+		107CA1DF2181DAE7001D66D8 /* UrlProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DE2181DAE7001D66D8 /* UrlProvider.swift */; };
 		107CA1E12181DAED001D66D8 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1E02181DAED001D66D8 /* Image.swift */; };
 		107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1E42181DB0A001D66D8 /* Barcode.swift */; };
 		10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F1A71B21808A88002A3A3B /* AppDelegate.swift */; };
@@ -33,7 +33,7 @@
 		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		107CA1D82181D76E001D66D8 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		107CA1DB2181D820001D66D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		107CA1DE2181DAE7001D66D8 /* UrlProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlProvider.swift; sourceTree = "<group>"; };
 		107CA1E02181DAED001D66D8 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		107CA1E42181DB0A001D66D8 /* Barcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barcode.swift; sourceTree = "<group>"; };
 		10F1A71821808A88002A3A3B /* BarcodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarcodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,7 +94,7 @@
 		107CA1DD2181DADA001D66D8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
+				107CA1DE2181DAE7001D66D8 /* UrlProvider.swift */,
 				107CA1E02181DAED001D66D8 /* Image.swift */,
 				107CA1E42181DB0A001D66D8 /* Barcode.swift */,
 			);
@@ -339,7 +339,7 @@
 				10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */,
 				10F1A731218098DA002A3A3B /* MainViewController.swift in Sources */,
 				10F1A73421809A93002A3A3B /* DownloadCell.swift in Sources */,
-				107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */,
+				107CA1DF2181DAE7001D66D8 /* UrlProvider.swift in Sources */,
 				107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */,
 				10F1A73E21809CED002A3A3B /* ResultCell.swift in Sources */,
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
