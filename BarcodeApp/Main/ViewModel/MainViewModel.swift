@@ -11,13 +11,13 @@ import RxSwift
 
 class MainViewModel {
     
-    var loadedObservable: Observable<Int> {
+    var loadedObservable: Observable<URL> {
         return loadedSubject
     }
-    var notLoadedObservable: Observable<Int> {
+    var notLoadedObservable: Observable<URL> {
         return notLoadedSubject
     }
-    var processedObservable: Observable<Int> {
+    var processedObservable: Observable<(url: URL, barcodeCount: Int)> {
         return processedSubject
     }
     
@@ -27,30 +27,27 @@ class MainViewModel {
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .subscribe { [weak self] images in
                 guard let `self` = self, let images = images.element else { return }
-                self.images = images
                 self.notifyAboutImages(images: images)
             }.disposed(by: disposeBag)
     }
     
-    private(set) var images: [Image] = []
-    
-    private let loadedSubject = ReplaySubject<Int>.createUnbounded()
-    private let notLoadedSubject = ReplaySubject<Int>.createUnbounded()
-    private let processedSubject = ReplaySubject<Int>.createUnbounded()
+    private let loadedSubject = ReplaySubject<URL>.createUnbounded()
+    private let notLoadedSubject = ReplaySubject<URL>.createUnbounded()
+    private let processedSubject = ReplaySubject<(url: URL, barcodeCount: Int)>.createUnbounded()
     private let imageProvider = ImageProvider()
     private let disposeBag = DisposeBag()
     
     private func notifyAboutImages(images: [Image]) {
-        for (index, image) in images.enumerated() {
-            switch image.state {
+        images.forEach {
+            switch $0.state {
             case .notLoaded:
-                notLoadedSubject.on(.next(index))
+                notLoadedSubject.onNext($0.url)
             case .loaded:
-                loadedSubject.on(.next(index))
+                loadedSubject.onNext($0.url)
             case .processed:
-                processedSubject.onNext(index)
+                processedSubject.onNext(($0.url, $0.barcodes.count))
             }
-        }
+        }        
         notLoadedSubject.onCompleted()
         loadedSubject.onCompleted()
         processedSubject.onCompleted()

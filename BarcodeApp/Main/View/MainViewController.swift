@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
         loadImages()
     }
     
-    private var cellStates: [Int:CellState] = [:]
+    private var urlsWithState: [CellState] = []
     private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
     
@@ -34,49 +34,48 @@ class MainViewController: UIViewController {
     }
     
     private func loadImages() {
-        func updateCell(indexes: Event<[Int]>) {
-            guard let _ = indexes.element else { return }
-            tableView.reloadData()
-        }
-        let notLoadedObservable = viewModel.notLoadedObservable.do(onNext: { [weak self] in self?.cellStates[$0] = .notLoaded })
-        let loadedObservable = viewModel.loadedObservable.do(onNext: { [weak self] in self?.cellStates[$0] = .loaded })
-        let processedObservable = viewModel.processedObservable.do(onNext: { [weak self] in self?.cellStates[$0] = .processed })
+        let notLoadedObservable = viewModel.notLoadedObservable
+            .do(onNext: { [weak self] in self?.urlsWithState.append(.notLoaded($0))})
+        let loadedObservable = viewModel.loadedObservable
+            .do(onNext: { [weak self] in self?.urlsWithState.append(.loaded($0))})
+        let processedObservable = viewModel.processedObservable
+            .do(onNext: { [weak self] in self?.urlsWithState.append(.processed($0.barcodeCount)) })
+            .map{ $0.url }
         
         Observable
             .concat(notLoadedObservable, loadedObservable, processedObservable)
-            .filter{ $0 >= 0 }
-            .toArray()
-            .subscribe(updateCell)
+            .do(onDispose: { [weak self] in self?.tableView.reloadData() })
+            .subscribe()
         .disposed(by: disposeBag)
     }
 
 }
 
 enum CellState {
-    case notLoaded
-    case loaded
-    case processed
+    case notLoaded(URL)
+    case loaded(URL)
+    case processed(Int)
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellStates.count
+        return urlsWithState.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
-        switch cellStates[index]! {
-        case .notLoaded:
+        switch urlsWithState[index] {
+        case .notLoaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: DownloadCell.identifier, for: indexPath) as! DownloadCell
-            cell.initCell(url: viewModel.images[indexPath.row].url.absoluteString)
+            cell.initCell(url: url.absoluteString)
             return cell
-        case .loaded:
+        case .loaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: ProcessCell.identifier, for: indexPath) as! ProcessCell
-            cell.initCell(url: viewModel.images[indexPath.row].url.absoluteString)
+            cell.initCell(url: url.absoluteString)
             return cell
-        case .processed:
+        case .processed(let count):
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
-            cell.initCell(barcodeCount: viewModel.images[indexPath.row].barcodes.count)
+            cell.initCell(barcodeCount: count)
             return cell
         }
     }
