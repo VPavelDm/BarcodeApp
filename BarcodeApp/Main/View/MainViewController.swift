@@ -54,6 +54,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         switch cell {
         case .notLoaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: DownloadCell.identifier, for: indexPath) as! DownloadCell
+            cell.delegate = self
             cell.initCell(url: url)
             return cell
         case .loaded(let url):
@@ -66,4 +67,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
+}
+
+extension MainViewController: DownloadCellDelegate {
+    func downloadButtonIsClicked(cell: DownloadCell) {
+        viewModel.loadImage(with: cell.url)
+            .subscribe(onSuccess: { [weak self] (indexes) in
+                let indexesPath = indexes.map { IndexPath(row: $0, section: 0) }
+                self?.tableView.reloadRows(at: indexesPath, with: .automatic)
+            }, onError: { (error) in
+                // MARK: Add error handling
+            })
+            .disposed(by: disposeBag)
+    }    
+    
 }

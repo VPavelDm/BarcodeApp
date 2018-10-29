@@ -30,6 +30,33 @@ class MainViewModel {
         return Disposables.create()
     }
     
+    func loadImage(with urlString: String) -> Single<[Int]> {
+        return Single.create { observer in
+            if let url = URL(string: urlString) {
+                self.imageLoader.downloadImage(with: url)
+                    .subscribe(onSuccess: { (image) in
+                        var indexes = [Int]()
+                        self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
+                            if case .notLoaded(let url) = cell, url == urlString {
+                                indexes += [index]
+                                return .loaded(url)
+                            } else {
+                                return cell
+                            }
+                        }                        
+                        observer(.success(indexes))
+                    }, onError: { (error) in
+                        observer(.error(error))
+                    })
+                    .disposed(by: self.disposeBag)
+            } else {
+                observer(.error(URLCastError()))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    private let imageLoader = ImageLoader()
     private let imageProvider = ImageProvider()
     private let disposeBag = DisposeBag()
     

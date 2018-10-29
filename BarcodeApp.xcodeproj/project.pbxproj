@@ -14,6 +14,8 @@
 		107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */; };
 		107CA1E12181DAED001D66D8 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1E02181DAED001D66D8 /* Image.swift */; };
 		107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1E42181DB0A001D66D8 /* Barcode.swift */; };
+		1085683321870304004DC0F3 /* URLCastError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1085683221870304004DC0F3 /* URLCastError.swift */; };
+		10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10856834218704AF004DC0F3 /* ImageLoader.swift */; };
 		10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F1A71B21808A88002A3A3B /* AppDelegate.swift */; };
 		10F1A72321808A89002A3A3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10F1A72221808A89002A3A3B /* Assets.xcassets */; };
 		10F1A72621808A89002A3A3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F1A72421808A89002A3A3B /* LaunchScreen.storyboard */; };
@@ -36,6 +38,8 @@
 		107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		107CA1E02181DAED001D66D8 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		107CA1E42181DB0A001D66D8 /* Barcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barcode.swift; sourceTree = "<group>"; };
+		1085683221870304004DC0F3 /* URLCastError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCastError.swift; sourceTree = "<group>"; };
+		10856834218704AF004DC0F3 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		10F1A71821808A88002A3A3B /* BarcodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarcodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10F1A71B21808A88002A3A3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10F1A72221808A89002A3A3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 		107CA1D62181D757001D66D8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				10856831218702F8004DC0F3 /* Error */,
 				107CA1D72181D762001D66D8 /* Extension */,
 			);
 			path = Core;
@@ -104,8 +109,17 @@
 			isa = PBXGroup;
 			children = (
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
+				10856834218704AF004DC0F3 /* ImageLoader.swift */,
 			);
 			path = Provider;
+			sourceTree = "<group>";
+		};
+		10856831218702F8004DC0F3 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				1085683221870304004DC0F3 /* URLCastError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		10F1A70F21808A88002A3A3B = {
@@ -350,8 +364,10 @@
 				107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */,
 				107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */,
 				10F1A73E21809CED002A3A3B /* ResultCell.swift in Sources */,
+				1085683321870304004DC0F3 /* URLCastError.swift in Sources */,
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
+				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
