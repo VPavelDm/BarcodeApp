@@ -105,13 +105,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1085682E2186F591004DC0F3 /* Provider */ = {
+		1085682E2186F591004DC0F3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
 				10856834218704AF004DC0F3 /* ImageLoader.swift */,
 			);
-			path = Provider;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		10856831218702F8004DC0F3 /* Error */ = {
@@ -146,7 +146,7 @@
 				10F1A72721808A89002A3A3B /* Info.plist */,
 				107CA1D62181D757001D66D8 /* Core */,
 				10F1A72D21808B14002A3A3B /* Support File */,
-				1085682E2186F591004DC0F3 /* Provider */,
+				1085682E2186F591004DC0F3 /* Service */,
 				FED850FDD9D6F7AC1914230F /* Main */,
 			);
 			path = BarcodeApp;
