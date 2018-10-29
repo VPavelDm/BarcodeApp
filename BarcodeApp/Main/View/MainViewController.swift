@@ -54,11 +54,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         switch cell {
         case .notLoaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: DownloadCell.identifier, for: indexPath) as! DownloadCell
-            cell.initCell(url: url.absoluteString)
+            cell.initCell(url: url)
             return cell
         case .loaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: ProcessCell.identifier, for: indexPath) as! ProcessCell
-            cell.initCell(url: url.absoluteString)
+            cell.initCell(url: url)
             return cell
         case .processed(let count):
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell

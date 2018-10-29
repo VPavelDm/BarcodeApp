@@ -19,8 +19,8 @@ class MainViewModel {
                 .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
                 .subscribe { [weak self] images in
                     guard let `self` = self, let images = images.element else { return }
-                    self.cells += images.filter { $0.state == .notLoaded }.map { .notLoaded($0.url) }
-                    self.cells += images.filter { $0.state == .loaded    }.map { .loaded($0.url) }
+                    self.cells += images.filter { $0.state == .notLoaded }.map { .notLoaded($0.url.absoluteString) }
+                    self.cells += images.filter { $0.state == .loaded    }.map { .loaded($0.url.absoluteString) }
                     self.cells += images.filter { $0.state == .processed }.map { .processed($0.barcodes.count) }
                     
                     observer(.completed)
@@ -36,7 +36,7 @@ class MainViewModel {
 }
 
 enum CellViewModel {
-    case notLoaded(URL)
-    case loaded(URL)
+    case notLoaded(String)
+    case loaded(String)
     case processed(Int)
 }
