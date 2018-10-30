@@ -76,7 +76,7 @@ extension MainViewController: DownloadCellDelegate {
                 let indexesPath = indexes.map { IndexPath(row: $0, section: 0) }
                 self?.tableView.reloadRows(at: indexesPath, with: .automatic)
             }, onError: { (error) in
-                // MARK: Add error handling
+                print(error.localizedDescription)
             })
             .disposed(by: disposeBag)
     }    

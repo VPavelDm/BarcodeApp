@@ -30,7 +30,7 @@ class ImageProvider {
     }
     
     private func getLoadedAndNotLoadedImages(for urls: [URL]) -> (loaded: [Image], notLoaded: [Image]) {
-        let loadedURLSet = Set(UserDefaults.standard.getCachedUrl())
+        let loadedURLSet = Set(UserDefaults.standard.getCachedUrls())
         let URLSet = Set(urls)
         
         let notLoadedImages = URLSet.subtracting(loadedURLSet).map { Image(url: $0, state: .notLoaded) }

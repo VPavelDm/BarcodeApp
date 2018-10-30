@@ -16,9 +16,8 @@ class ImageFileManager {
             guard let `self` = self else { return Disposables.create() }
             do {
                 let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                let savedUrl = self.getNextCachedName(cachesDirectory: cachesDirectory)
+                let savedUrl = self.getNextCachedName(cachesDirectory: cachesDirectory, for: url)
                 try data.write(to: savedUrl, options: [.atomic])
-                self.userDefaults.addCachedUrl(url: url)
                 observer(.completed)
             } catch let error {
                 observer(.error(error))
@@ -29,8 +28,8 @@ class ImageFileManager {
     
     private let userDefaults = UserDefaults.standard
     
-    private func getNextCachedName(cachesDirectory: URL) -> URL {
-        let urlName = String(userDefaults.getCachedUrlCount())
+    private func getNextCachedName(cachesDirectory: URL, for url: URL) -> URL {
+        let urlName = String(userDefaults.addCachedUrl(url: url))
         let savedUrl = cachesDirectory.appendingPathComponent(urlName)
         return savedUrl
     }

@@ -10,19 +10,33 @@ import Foundation
 
 extension UserDefaults {
     
-    func addCachedUrl(url: URL) {
-        var dictionary = self.dictionary(forKey: "cachedUrls") ?? [:]
-        dictionary[url.absoluteString] = dictionary.count
+    func addCachedUrl(url: URL) -> String {
+        var dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
+        let name = getNextCachedName()
+        dictionary[url.absoluteString] = name
         set(dictionary, forKey: "cachedUrls")
+        return name
     }
     
-    func getCachedUrlCount() -> Int {
-        return dictionary(forKey: "cachedUrls")?.count ?? 0
-    }
-    
-    func getCachedUrl() -> [URL] {
-        let dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, Int> ?? [:]
+    func getCachedUrls() -> [URL] {
+        syncCachedURL()
+        let dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
         return dictionary.keys.map { URL(string: $0)! }
+    }
+    
+    private func syncCachedURL() {
+        do {
+            var dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
+            let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            var contents = try FileManager.default.contentsOfDirectory(atPath: cachesDirectory.path)
+            contents = contents.filter { $0.starts(with: "com_vpaveldm_")}
+            dictionary = dictionary.filter { contents.contains($0.value)}
+            set(dictionary, forKey: "cachedUrls")
+        } catch _ {}
+    }
+    
+    private func getNextCachedName() -> String {
+        return "com_vpaveldm_" + String(dictionary(forKey: "cachedUrls")?.count ?? 0)
     }
     
 }

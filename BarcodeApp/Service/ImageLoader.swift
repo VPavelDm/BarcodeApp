@@ -11,6 +11,12 @@ import RxSwift
 
 class ImageLoader {
     
+    init() {
+        let urlSessionConfiguration = URLSessionConfiguration.ephemeral
+        urlSessionConfiguration.httpMaximumConnectionsPerHost = 5
+        urlSession = URLSession(configuration: urlSessionConfiguration)
+    }
+    
     func downloadImage(with url: URL) -> Single<Image> {
         return Single.create {observer in
             let dataTask = self.urlSession.dataTask(with: url) { [weak self] (data, response, error) in
@@ -33,8 +39,6 @@ class ImageLoader {
     }
     
     private let fileManager = ImageFileManager()
-    private var urlSession: URLSession {
-        return URLSession(configuration: .ephemeral)
-    }
+    private var urlSession: URLSession
     
 }
