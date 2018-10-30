@@ -13,15 +13,18 @@ class ImageLoader {
     
     func downloadImage(with url: URL) -> Single<Image> {
         return Single.create {observer in
-            let dataTask = self.urlSession.dataTask(with: url) { (data, response, error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        observer(.error(error))
-                    } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
-                        // MARK: Cache data
-                        let image = Image(url: url, state: .loaded)
-                        observer(.success(image))
-                    }
+            let dataTask = self.urlSession.dataTask(with: url) { [weak self] (data, response, error) in
+                guard let `self` = self else { return }
+                if let error = error {
+                    observer(.error(error))
+                } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
+                    self.fileManager.save(url: url, data: data)
+                        .subscribe(onCompleted: {
+                            let image = Image(url: url, state: .loaded)
+                            observer(.success(image))
+                        }, onError: { (error) in
+                            observer(.error(error))
+                        }).dispose()
                 }
             }
             dataTask.resume()
@@ -29,6 +32,7 @@ class ImageLoader {
         }
     }
     
+    private let fileManager = ImageFileManager()
     private var urlSession: URLSession {
         return URLSession(configuration: .ephemeral)
     }

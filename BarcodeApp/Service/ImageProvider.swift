@@ -17,13 +17,26 @@ class ImageProvider {
             do {
                 let filePath = Bundle.main.url(forResource: "Urls", withExtension: "txt")!
                 let fileContent = try String(contentsOf: filePath)
-                let images = fileContent.split(separator: "\n").map{ URL(string: $0.str)! }.map { Image(url: $0, state: .notLoaded) }
-                observer.onNext(images)
+                
+                let urls = fileContent.split(separator: "\n").map{ URL(string: $0.str)! }
+                let images = self.getLoadedAndNotLoadedImages(for: urls)
+                
+                observer.onNext(images.loaded + images.notLoaded)
             } catch let error {
                 print(error)
             }
             return Disposables.create()
         }
+    }
+    
+    private func getLoadedAndNotLoadedImages(for urls: [URL]) -> (loaded: [Image], notLoaded: [Image]) {
+        let loadedURLSet = Set(UserDefaults.standard.getCachedUrl())
+        let URLSet = Set(urls)
+        
+        let notLoadedImages = URLSet.subtracting(loadedURLSet).map { Image(url: $0, state: .notLoaded) }
+        let loadedImages = loadedURLSet.intersection(URLSet).map { Image(url: $0, state: .loaded) }
+        
+        return (loaded: loadedImages, notLoaded: notLoadedImages)
     }
     
 }

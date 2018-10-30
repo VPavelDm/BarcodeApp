@@ -45,24 +45,27 @@ class MainViewModel {
     private let disposeBag = DisposeBag()
     
     private func loadImage(url urlParam: URL, observer: @escaping (SingleEvent<[Int]>) -> ()) {
-        imageLoader.downloadImage(with: urlParam).subscribe(onSuccess: { [weak self] (image) in
-            guard let `self` = self else { return }
-            
-            var indexes = [Int]()
-            
-            self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
-                if case .notLoaded(let url) = cell, URL(string: url) == urlParam {
-                    indexes += [index]
-                    return .loaded(url)
-                } else {
-                    return cell
+        imageLoader.downloadImage(with: urlParam)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onSuccess: { [weak self] (image) in
+                guard let `self` = self else { return }
+                
+                var indexes = [Int]()
+                
+                self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
+                    if case .notLoaded(let url) = cell, URL(string: url) == urlParam {
+                        indexes += [index]
+                        return .loaded(url)
+                    } else {
+                        return cell
+                    }
                 }
-            }
-            
-            observer(.success(indexes))
-            }, onError: { (error) in
-                observer(.error(error))
-        }).disposed(by: disposeBag)
+                
+                observer(.success(indexes))
+                }, onError: { (error) in
+                    observer(.error(error))
+            }).disposed(by: disposeBag)
     }
     
 }

@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1011B7F221883F23002BC6E9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1011B7F121883F23002BC6E9 /* UserDefaults.swift */; };
 		1013D8D72183297200C2581C /* Urls.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1013D8D62183297200C2581C /* Urls.txt */; };
 		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
+		104C23C821877DDC00040DA4 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104C23C721877DDC00040DA4 /* ImageFileManager.swift */; };
 		107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1D82181D76E001D66D8 /* UITableViewCell.swift */; };
 		107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DB2181D820001D66D8 /* MainViewModel.swift */; };
 		107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */; };
@@ -31,8 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1011B7F121883F23002BC6E9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		1013D8D62183297200C2581C /* Urls.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Urls.txt; sourceTree = "<group>"; };
 		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		104C23C721877DDC00040DA4 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		107CA1D82181D76E001D66D8 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		107CA1DB2181D820001D66D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			children = (
 				107CA1D82181D76E001D66D8 /* UITableViewCell.swift */,
 				1013D8D8218329FC00C2581C /* String.swift */,
+				1011B7F121883F23002BC6E9 /* UserDefaults.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -110,6 +115,7 @@
 			children = (
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
 				10856834218704AF004DC0F3 /* ImageLoader.swift */,
+				104C23C721877DDC00040DA4 /* ImageFileManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -360,11 +366,13 @@
 				107CA1E12181DAED001D66D8 /* Image.swift in Sources */,
 				10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */,
 				10F1A731218098DA002A3A3B /* MainViewController.swift in Sources */,
+				104C23C821877DDC00040DA4 /* ImageFileManager.swift in Sources */,
 				10F1A73421809A93002A3A3B /* DownloadCell.swift in Sources */,
 				107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */,
 				107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */,
 				10F1A73E21809CED002A3A3B /* ResultCell.swift in Sources */,
 				1085683321870304004DC0F3 /* URLCastError.swift in Sources */,
+				1011B7F221883F23002BC6E9 /* UserDefaults.swift in Sources */,
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
 				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
