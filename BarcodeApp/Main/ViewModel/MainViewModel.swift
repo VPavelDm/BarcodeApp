@@ -16,8 +16,14 @@ class MainViewModel {
     init() {
         imageLoader.progressObservable
             .subscribe { [weak self] result in
-                guard let `self` = self, let result = result.element, let download = self.downloads[result.url] else { return }
-                download.updateAndNotifySubscribers(progress: result.progress)
+                guard let `self` = self, let result = result.element else { return }
+                if let error = result.error {
+                    for download in self.downloads {
+                        download.value.sendError(error)
+                    }
+                } else if let url = result.url, let progress = result.progress, let download = self.downloads[url] {
+                    download.updateAndNotifySubscribers(progress: progress)
+                }
             }
             .disposed(by: disposeBag)
     }

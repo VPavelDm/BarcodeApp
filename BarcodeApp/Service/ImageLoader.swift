@@ -30,7 +30,7 @@ class ImageLoader: NSObject {
     private var urlSession: URLSession!
     private let progressSubject = PublishSubject<ProgressType>()
     
-    typealias ProgressType = (url: URL, progress: Float)
+    typealias ProgressType = (url: URL?, progress: Float?, error: Error?)
     
 }
 
@@ -43,12 +43,12 @@ extension ImageLoader: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         guard let url = downloadTask.originalRequest?.url else { return }
         let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-        self.progressSubject.onNext((url: url, progress: progress))
+        self.progressSubject.onNext((url: url, progress: progress, error: nil))
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
-            progressSubject.onError(error)
+            progressSubject.onNext((url: nil, progress: nil, error: error))
         }
     }
     

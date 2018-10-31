@@ -77,8 +77,10 @@ extension MainViewController: DownloadCellDelegate {
             .subscribe(onNext: { [weak self] (progress) in
                 guard let `self` = self, let cell = self.tableView.cellForRow(at: indexPath) as? DownloadCell else { return }
                 cell.progressView.progress = progress
-            }, onError: { (error) in
-                
+            }, onError: { [weak self] (error) in
+                guard let `self` = self else { return }
+                let alert = UIAlertController(with: error)
+                self.present(alert, animated: true)
             }, onCompleted: { [weak self] in
                 guard let `self` = self, let indexPath = cell.indexPath else { return }
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)

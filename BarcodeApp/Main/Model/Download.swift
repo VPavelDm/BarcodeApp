@@ -23,6 +23,10 @@ class Download {
         }
     }
     
+    func sendError(_ error: Error) {
+        progressSubject.onError(error)
+    }
+    
     private      var progressSubject = PublishSubject<Float>()
     private(set) var currentProgress: Float = 0
     
