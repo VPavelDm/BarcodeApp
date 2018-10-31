@@ -11,16 +11,15 @@ import RxSwift
 
 class ImageFileManager {
     
-    func save(url: URL, data: Data) -> Completable {
-        return Completable.create { [weak self] observer in
-            guard let `self` = self else { return Disposables.create() }
+    func move(from fromURL: URL, to toURL: URL) -> Completable {
+        return Completable.create { observer in
             do {
                 let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                let savedUrl = self.getNextCachedName(cachesDirectory: cachesDirectory, for: url)
-                try data.write(to: savedUrl, options: [.atomic])
-                observer(.completed)
+                let savedUrl = self.getNextCachedName(cachesDirectory: cachesDirectory, for: toURL)
+                try? FileManager.default.removeItem(at: savedUrl)
+                try FileManager.default.copyItem(at: fromURL, to: savedUrl)
             } catch let error {
-                observer(.error(error))
+                print(error.localizedDescription)
             }
             return Disposables.create()
         }

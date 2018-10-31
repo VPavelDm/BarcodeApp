@@ -29,6 +29,7 @@ class ImageLoader: NSObject {
     
     private var urlSession: URLSession!
     private let progressSubject = PublishSubject<ProgressType>()
+    private let imageFileManager = ImageFileManager()
     
     typealias ProgressType = (url: URL?, progress: Float?, error: Error?)
     
@@ -38,6 +39,12 @@ extension ImageLoader: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         // MARK: Copy file to the permanent storage
+        guard let sourceURL = downloadTask.originalRequest?.url else { return }
+        imageFileManager.move(from: location, to: sourceURL)
+            .subscribe(onError: { [weak self] (error) in
+                guard let `self` = self else { return }
+                self.progressSubject.onNext((url: nil, progress: nil, error: error))
+            }).dispose()
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
