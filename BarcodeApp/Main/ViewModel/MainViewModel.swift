@@ -12,66 +12,73 @@ import RxSwift
 class MainViewModel {
     
     var cells: [CellViewModel] = []
-    lazy var dataObservable: Completable = Completable.create { [weak self] observer in
-        guard let `self` = self else { return Disposables.create() }
-        self.imageProvider.getData()
-            .observeOn(MainScheduler.instance)
-            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
-            .subscribe { [weak self] images in
-                guard let `self` = self, let images = images.element else { return }
-                self.cells += images.filter { $0.state == .notLoaded }.map { .notLoaded($0.url.absoluteString) }
-                self.cells += images.filter { $0.state == .loaded    }.map { .loaded($0.url.absoluteString) }
-                self.cells += images.filter { $0.state == .processed }.map { .processed($0.barcodes.count) }
-                
-                observer(.completed)
+    
+    init() {
+        imageLoader.progressObservable
+            .subscribe { [weak self] result in
+                guard let `self` = self, let result = result.element, let download = self.downloads[result.url] else { return }
+                download.updateAndNotifySubscribers(progress: result.progress)
             }
-            .disposed(by: self.disposeBag)
-        return Disposables.create()
+            .disposed(by: disposeBag)
     }
     
-    func loadImage(with urlString: String) -> Single<[Int]> {
-        return Single.create { [weak self] observer in
-            if let `self` = self, let url = URL(string: urlString) {
-                self.loadImage(url: url, observer: observer)
-            } else {
-                observer(.error(URLCastError()))
-            }
+    private var downloads: [URL: Download] = [:]
+    private let imageProvider = ImageProvider()
+    private let imageLoader = ImageLoader()
+    private let disposeBag = DisposeBag()
+    
+}
+
+extension MainViewModel {
+    
+    func getData() -> Completable {
+        return Completable.create { [weak self] observer in
+            guard let `self` = self else { return Disposables.create() }
+            self.imageProvider.getData()
+                .subscribe { [weak self] images in
+                    guard let `self` = self, let images = images.element else { return }
+                    self.cells += images.filter { $0.state == .notLoaded }.map { .notLoaded($0.url) }
+                    self.cells += images.filter { $0.state == .loaded    }.map { .loaded($0.url) }
+                    self.cells += images.filter { $0.state == .processed }.map { .processed($0.barcodes.count) }
+                    
+                    observer(.completed)
+                }
+                .disposed(by: self.disposeBag)
             return Disposables.create()
         }
     }
     
-    private let imageLoader = ImageLoader()
-    private let imageProvider = ImageProvider()
-    private let disposeBag = DisposeBag()
+}
+
+extension MainViewModel {
     
-    private func loadImage(url urlParam: URL, observer: @escaping (SingleEvent<[Int]>) -> ()) {
-        imageLoader.downloadImage(with: urlParam)
-            .observeOn(MainScheduler.instance)
-            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
-            .subscribe(onSuccess: { [weak self] (image) in
+    func loadImage(url: URL) -> Observable<Float> {
+        let download = Download()
+        downloads[url] = download
+        return download.progressObservable
+            .do(onCompleted: { [weak self] in
                 guard let `self` = self else { return }
-                
-                var indexes = [Int]()
-                
+                self.downloads[url] = nil
                 self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
-                    if case .notLoaded(let url) = cell, URL(string: url) == urlParam {
-                        indexes += [index]
+                    if case .notLoaded(let caseURL) = cell, caseURL == url {
                         return .loaded(url)
                     } else {
                         return cell
                     }
                 }
-                
-                observer(.success(indexes))
-                }, onError: { (error) in
-                    observer(.error(error))
-            }).disposed(by: disposeBag)
+                }, onSubscribed: { [weak self] in
+                    self?.imageLoader.downloadImage(with: url)
+            })
+    }
+    
+    func getProgress(for url: URL) -> Float {
+        return downloads[url]?.currentProgress ?? 0
     }
     
 }
 
 enum CellViewModel {
-    case notLoaded(String)
-    case loaded(String)
+    case notLoaded(URL)
+    case loaded(URL)
     case processed(Int)
 }

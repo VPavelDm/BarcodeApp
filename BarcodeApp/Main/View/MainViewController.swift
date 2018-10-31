@@ -19,10 +19,6 @@ class MainViewController: UIViewController {
         loadImages()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
     
@@ -33,7 +29,9 @@ class MainViewController: UIViewController {
     }
     
     private func loadImages() {
-        viewModel.dataObservable
+        viewModel.getData()
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
             .subscribe { [unowned self] _ in
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
@@ -55,7 +53,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         case .notLoaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: DownloadCell.identifier, for: indexPath) as! DownloadCell
             cell.delegate = self
-            cell.initCell(url: url)
+            cell.initCell(url: url, progress: viewModel.getProgress(for: url), indexPath: indexPath)
             return cell
         case .loaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: ProcessCell.identifier, for: indexPath) as! ProcessCell
@@ -71,12 +69,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController: DownloadCellDelegate {
     func downloadButtonIsClicked(cell: DownloadCell) {
-        viewModel.loadImage(with: cell.url)
-            .subscribe(onSuccess: { [weak self] (indexes) in
-                let indexesPath = indexes.map { IndexPath(row: $0, section: 0) }
-                self?.tableView.reloadRows(at: indexesPath, with: .automatic)
+        assert(cell.url != nil && cell.indexPath != nil, "The Cell is not initialized")
+        guard let url = cell.url, let indexPath = cell.indexPath else { return }
+        viewModel.loadImage(url: url)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onNext: { [weak self] (progress) in
+                guard let `self` = self, let cell = self.tableView.cellForRow(at: indexPath) as? DownloadCell else { return }
+                cell.progressView.progress = progress
             }, onError: { (error) in
-                print(error.localizedDescription)
+                
+            }, onCompleted: { [weak self] in
+                guard let `self` = self, let indexPath = cell.indexPath else { return }
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
             })
             .disposed(by: disposeBag)
     }    

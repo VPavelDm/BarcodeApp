@@ -9,36 +9,47 @@
 import Foundation
 import RxSwift
 
-class ImageLoader {
+class ImageLoader: NSObject {
     
-    init() {
+    override init() {
+        super.init()
         let urlSessionConfiguration = URLSessionConfiguration.ephemeral
         urlSessionConfiguration.httpMaximumConnectionsPerHost = 5
-        urlSession = URLSession(configuration: urlSessionConfiguration)
+        urlSession = URLSession(configuration: urlSessionConfiguration, delegate: self, delegateQueue: nil)
     }
     
-    func downloadImage(with url: URL) -> Single<Image> {
-        return Single.create {observer in
-            let dataTask = self.urlSession.dataTask(with: url) { [weak self] (data, response, error) in
-                guard let `self` = self else { return }
-                if let error = error {
-                    observer(.error(error))
-                } else if let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data {
-                    self.fileManager.save(url: url, data: data)
-                        .subscribe(onCompleted: {
-                            let image = Image(url: url, state: .loaded)
-                            observer(.success(image))
-                        }, onError: { (error) in
-                            observer(.error(error))
-                        }).dispose()
-                }
-            }
-            dataTask.resume()
-            return Disposables.create { dataTask.cancel() }
+    var progressObservable: Observable<ProgressType> {
+        return progressSubject
+    }
+    
+    func downloadImage(with url: URL) {
+        let downloadTask = urlSession.downloadTask(with: url)
+        downloadTask.resume()
+    }
+    
+    private var urlSession: URLSession!
+    private let progressSubject = PublishSubject<ProgressType>()
+    
+    typealias ProgressType = (url: URL, progress: Float)
+    
+}
+
+extension ImageLoader: URLSessionDownloadDelegate {
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        // MARK: Copy file to the permanent storage
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        guard let url = downloadTask.originalRequest?.url else { return }
+        let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+        self.progressSubject.onNext((url: url, progress: progress))
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            progressSubject.onError(error)
         }
     }
-    
-    private let fileManager = ImageFileManager()
-    private var urlSession: URLSession
     
 }

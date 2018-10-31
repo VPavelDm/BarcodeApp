@@ -11,6 +11,7 @@ import UIKit
 class DownloadCell: UITableViewCell {
 
     @IBOutlet private weak var urlLabel: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
     
     @IBAction private func clickDownload(_ sender: Any) {
         delegate?.downloadButtonIsClicked(cell: self)
@@ -18,12 +19,19 @@ class DownloadCell: UITableViewCell {
     
     weak var delegate: DownloadCellDelegate?
     
-    var url: String {
-        return urlLabel.text!
+    var url: URL? {
+        if let text = urlLabel.text {
+            return URL(string: text)!
+        } else {
+            return nil
+        }
     }
+    var indexPath: IndexPath?
     
-    func initCell(url: String) {
-        urlLabel.text = url
+    func initCell(url: URL, progress: Float, indexPath: IndexPath) {
+        urlLabel.text = url.absoluteString
+        progressView.progress = progress
+        self.indexPath = indexPath
     }
     
 }
