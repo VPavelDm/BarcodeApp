@@ -43,9 +43,13 @@ extension MainViewModel {
             self.imageProvider.getData()
                 .subscribe { [weak self] images in
                     guard let `self` = self, let images = images.element else { return }
-                    self.cells += images.filter { $0.state == .notLoaded }.map { .notLoaded($0.url) }
-                    self.cells += images.filter { $0.state == .loaded    }.map { .loaded($0.url) }
-                    self.cells += images.filter { $0.state == .processed }.map { .processed($0.barcodes.count) }
+                    images.forEach {
+                        switch $0.state {
+                        case .loaded:       self.cells += [.loaded($0.url)]
+                        case .notLoaded:    self.cells += [.notLoaded($0.url)]
+                        case .processed:    self.cells += [.processed($0.barcodes.count)]
+                        }                        
+                    }
                     
                     observer(.completed)
                 }

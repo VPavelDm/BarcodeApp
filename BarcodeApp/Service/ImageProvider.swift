@@ -21,7 +21,9 @@ class ImageProvider {
                 let urls = fileContent.split(separator: "\n").map{ URL(string: $0.str)! }
                 let images = self.getLoadedAndNotLoadedImages(for: urls)
                 
-                observer.onNext(images.loaded + images.notLoaded)
+                observer.onNext((images.loaded + images.notLoaded).sorted(by: { frst, scnd in
+                    return frst.url.absoluteString < scnd.url.absoluteString
+                }))
             } catch let error {
                 print(error)
             }
