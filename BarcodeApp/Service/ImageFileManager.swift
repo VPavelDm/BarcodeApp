@@ -28,7 +28,7 @@ class ImageFileManager {
     private let userDefaults = UserDefaults.standard
     
     private func getNextCachedName(cachesDirectory: URL, for url: URL) -> URL {
-        let urlName = String(userDefaults.addCachedUrl(url: url))
+        let urlName = String(userDefaults.addNetworkURL(url: url))
         let savedUrl = cachesDirectory.appendingPathComponent(urlName)
         return savedUrl
     }

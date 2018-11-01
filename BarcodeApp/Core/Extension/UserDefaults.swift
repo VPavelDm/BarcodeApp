@@ -10,7 +10,7 @@ import Foundation
 
 extension UserDefaults {
     
-    func addCachedUrl(url: URL) -> String {
+    func addNetworkURL(url: URL) -> String {
         var dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
         let name = getNextCachedName()
         dictionary[url.absoluteString] = name
@@ -18,21 +18,30 @@ extension UserDefaults {
         return name
     }
     
-    func getCachedUrls() -> [URL] {
+    func getNetworkURLs() -> [URL] {
         syncCachedURL()
         let dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
         return dictionary.keys.map { URL(string: $0)! }
     }
     
+    func getLocalUrl(for networkURL: URL) -> URL? {
+        guard
+            let cachesDirectory = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+            let dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String>,
+            let name = dictionary[networkURL.absoluteString]
+            else { return nil }
+        return cachesDirectory.appendingPathComponent(name)
+    }
+    
     private func syncCachedURL() {
-        do {
-            var dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
-            let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            var contents = try FileManager.default.contentsOfDirectory(atPath: cachesDirectory.path)
-            contents = contents.filter { $0.starts(with: "com_vpaveldm_")}
-            dictionary = dictionary.filter { contents.contains($0.value)}
-            set(dictionary, forKey: "cachedUrls")
-        } catch _ {}
+        guard
+            let cachesDirectory = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+            var dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String>,
+            var contents = try? FileManager.default.contentsOfDirectory(atPath: cachesDirectory.path)
+            else { return }
+        contents = contents.filter { $0.starts(with: "com_vpaveldm_")}
+        dictionary = dictionary.filter { contents.contains($0.value)}
+        set(dictionary, forKey: "cachedUrls")
     }
     
     private func getNextCachedName() -> String {
