@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import Firebase
 
 class MainViewController: UIViewController {
     
@@ -57,7 +58,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .loaded(let url):
             let cell = tableView.dequeueReusableCell(withIdentifier: ProcessCell.identifier, for: indexPath) as! ProcessCell
-            cell.initCell(url: url)
+            cell.delegate = self
+            cell.initCell(url: url, indexPath: indexPath)
             return cell
         case .processed(let count):
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
@@ -67,7 +69,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension MainViewController: DownloadCellDelegate {
+extension MainViewController: DownloadCellDelegate, ProcessCellDelegate {
+    func processButtonIsClicked(cell: ProcessCell) {
+        guard let url = cell.url else { return }
+        viewModel.findBarcodes(url: url)
+            .subscribe(onCompleted: { [weak self] in
+                guard let `self` = self, let indexPath = cell.indexPath else { return }
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }) { [weak self] (error) in
+                guard let `self` = self else { return }
+                let alert = UIAlertController(with: error)
+                self.present(alert, animated: true)
+            }.disposed(by: disposeBag)
+    }
+    
     func downloadButtonIsClicked(cell: DownloadCell) {
         assert(cell.url != nil && cell.indexPath != nil, "The Cell is not initialized")
         guard let url = cell.url, let indexPath = cell.indexPath else { return }
@@ -86,6 +101,6 @@ extension MainViewController: DownloadCellDelegate {
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             })
             .disposed(by: disposeBag)
-    }    
+    }
     
 }

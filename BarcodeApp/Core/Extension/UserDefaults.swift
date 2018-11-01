@@ -24,6 +24,17 @@ extension UserDefaults {
         return dictionary.keys.map { URL(string: $0)! }
     }
     
+    func getLocalUrl(for url: URL) -> URL? {
+        var dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
+        if let name = dictionary[url.absoluteString] {
+            do {
+                let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                return cachesDirectory.appendingPathComponent(name)
+            } catch _ {}
+        }
+        return nil
+    }
+    
     private func syncCachedURL() {
         do {
             var dictionary = self.dictionary(forKey: "cachedUrls") as? Dictionary<String, String> ?? [:]
