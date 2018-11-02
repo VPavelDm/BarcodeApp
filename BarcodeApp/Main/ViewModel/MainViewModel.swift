@@ -105,7 +105,14 @@ extension MainViewModel {
                 else { return Disposables.create() }
             self.getBarcodeDetector().detect(in: image, completion: { (barcodes, error) in
                 guard error == nil, let barcodes = barcodes else { return }
-                // MARK: Save barcodes to the CoreData
+                let barcodeDAO = BarcodeDAO()
+                for barcode in barcodes {
+                    guard let corners = barcode.cornerPoints else { continue }
+                    
+                    barcodeDAO.save(x1: corners[0].cgPointValue.x.double, y1: corners[0].cgPointValue.y.double,
+                                    x2: corners[1].cgPointValue.x.double, y2: corners[1].cgPointValue.y.double,
+                                    for: url)
+                }
                 self.changeCellState(oldState: .loaded(url), newState: .processed(barcodes.count), url: url)
                 observer(.completed)
             })

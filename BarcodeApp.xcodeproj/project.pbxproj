@@ -13,6 +13,8 @@
 		101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101C9E5D218AFC7500220594 /* GoogleService-Info.plist */; };
 		101C9E60218B025A00220594 /* LoadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C9E5F218B025A00220594 /* LoadImageError.swift */; };
 		102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 102A986F218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld */; };
+		102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9872218C432700BA2737 /* BarcodeDAO.swift */; };
+		102A9877218C464800BA2737 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9876218C464800BA2737 /* CGFloat.swift */; };
 		104C23C821877DDC00040DA4 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104C23C721877DDC00040DA4 /* ImageFileManager.swift */; };
 		1077F9532189C101003B3EC6 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077F9522189C101003B3EC6 /* Download.swift */; };
 		107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C22162189F23000C79AA9 /* UIAlertController.swift */; };
@@ -45,6 +47,8 @@
 		101C9E5D218AFC7500220594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		101C9E5F218B025A00220594 /* LoadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageError.swift; sourceTree = "<group>"; };
 		102A9870218C3BA100BA2737 /* BarcodeDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarcodeDataModel.xcdatamodel; sourceTree = "<group>"; };
+		102A9872218C432700BA2737 /* BarcodeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDAO.swift; sourceTree = "<group>"; };
+		102A9876218C464800BA2737 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		104C23C721877DDC00040DA4 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		1077F9522189C101003B3EC6 /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		107C22162189F23000C79AA9 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		107CA1D72181D762001D66D8 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				102A9876218C464800BA2737 /* CGFloat.swift */,
 				107CA1D82181D76E001D66D8 /* UITableViewCell.swift */,
 				1013D8D8218329FC00C2581C /* String.swift */,
 				1011B7F121883F23002BC6E9 /* UserDefaults.swift */,
@@ -131,6 +136,7 @@
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
 				10856834218704AF004DC0F3 /* ImageLoader.swift */,
 				104C23C721877DDC00040DA4 /* ImageFileManager.swift */,
+				102A9872218C432700BA2737 /* BarcodeDAO.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -394,6 +400,7 @@
 			files = (
 				107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */,
 				1013D8D9218329FC00C2581C /* String.swift in Sources */,
+				102A9877218C464800BA2737 /* CGFloat.swift in Sources */,
 				107CA1E12181DAED001D66D8 /* Image.swift in Sources */,
 				10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */,
 				10F1A731218098DA002A3A3B /* MainViewController.swift in Sources */,
@@ -409,6 +416,7 @@
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
 				102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */,
+				102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */,
 				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
 				101C9E60218B025A00220594 /* LoadImageError.swift in Sources */,
 				107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */,
