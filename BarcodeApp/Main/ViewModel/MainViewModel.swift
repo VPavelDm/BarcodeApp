@@ -35,6 +35,16 @@ class MainViewModel {
     private let imageFileManager = ImageFileManager()
     private let disposeBag = DisposeBag()
     
+    private func changeCellState(oldState: CellViewModel, newState: CellViewModel, url: URL) {
+        self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
+            if oldState == cell {
+                return newState
+            } else {
+                return cell
+            }
+        }
+    }
+    
 }
 
 extension MainViewModel {
@@ -71,13 +81,7 @@ extension MainViewModel {
             .do(onCompleted: { [weak self] in
                 guard let `self` = self else { return }
                 self.downloads[url] = nil
-                self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
-                    if case .notLoaded(let caseURL) = cell, caseURL == url {
-                        return .loaded(url)
-                    } else {
-                        return cell
-                    }
-                }
+                self.changeCellState(oldState: .notLoaded(url), newState: .loaded(url), url: url)
                 }, onSubscribed: { [weak self] in
                     self?.imageLoader.downloadImage(with: url)
             })
@@ -99,35 +103,39 @@ extension MainViewModel {
                 let imageData = self.imageFileManager.readImage(with: localURL),
                 let image = VisionImage.create(by: imageData)
                 else { return Disposables.create() }
-            let vision = Vision.vision()
-            let barcodeOptions = VisionBarcodeDetectorOptions(formats: [.qrCode])
-            let barcodeDetector = vision.barcodeDetector(options: barcodeOptions)
-            barcodeDetector.detect(in: image, completion: { (barcodes, error) in
+            self.getBarcodeDetector().detect(in: image, completion: { (barcodes, error) in
                 guard error == nil, let barcodes = barcodes else { return }
                 // MARK: Save barcodes to the CoreData
-                self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
-                    if case .loaded(let caseURL) = cell, caseURL == url {
-                        return .processed(barcodes.count)
-                    } else {
-                        return cell
-                    }
-                }
-                for barcode in barcodes {
-                    guard let corners = barcode.cornerPoints else { continue }
-                    for corner in corners {
-                        print(corner)
-                    }
-                }
+                self.changeCellState(oldState: .loaded(url), newState: .processed(barcodes.count), url: url)
                 observer(.completed)
             })
             return Disposables.create()
         }
     }
     
+    private func getBarcodeDetector() -> VisionBarcodeDetector {
+        let vision = Vision.vision()
+        let barcodeOptions = VisionBarcodeDetectorOptions(formats: [.qrCode])
+        return vision.barcodeDetector(options: barcodeOptions)
+    }
+    
 }
 
-enum CellViewModel {
+enum CellViewModel: Equatable {
     case notLoaded(URL)
     case loaded(URL)
     case processed(Int)
+    
+    static func ==(lhs: CellViewModel, rhs: CellViewModel) -> Bool {
+        switch (lhs, rhs) {
+        case let (.notLoaded(url1), .notLoaded(url2)):
+            return url1 == url2
+        case let (.loaded(url1), .loaded(url2)):
+            return url1 == url2
+        case let (.processed(count1), .processed(count2)):
+            return count1 == count2
+        default:
+            return false
+        }
+    }
 }
