@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Firebase
 
 class MainViewModel {
     
@@ -31,6 +32,7 @@ class MainViewModel {
     private var downloads: [URL: Download] = [:]
     private let imageProvider = ImageProvider()
     private let imageLoader = ImageLoader()
+    private let imageFileManager = ImageFileManager()
     private let disposeBag = DisposeBag()
     
 }
@@ -83,6 +85,43 @@ extension MainViewModel {
     
     func getProgress(for url: URL) -> Float {
         return downloads[url]?.currentProgress ?? 0
+    }
+    
+}
+
+extension MainViewModel {
+    
+    func findBarcodes(url: URL) -> Completable {
+        return Completable.create { [weak self] observer in
+            guard
+                let `self` = self,
+                let localURL = UserDefaults.standard.getLocalUrl(for: url),
+                let imageData = self.imageFileManager.readImage(with: localURL),
+                let image = VisionImage.create(by: imageData)
+                else { return Disposables.create() }
+            let vision = Vision.vision()
+            let barcodeOptions = VisionBarcodeDetectorOptions(formats: [.qrCode])
+            let barcodeDetector = vision.barcodeDetector(options: barcodeOptions)
+            barcodeDetector.detect(in: image, completion: { (barcodes, error) in
+                guard error == nil, let barcodes = barcodes else { return }
+                // MARK: Save barcodes to the CoreData
+                self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
+                    if case .loaded(let caseURL) = cell, caseURL == url {
+                        return .processed(barcodes.count)
+                    } else {
+                        return cell
+                    }
+                }
+                for barcode in barcodes {
+                    guard let corners = barcode.cornerPoints else { continue }
+                    for corner in corners {
+                        print(corner)
+                    }
+                }
+                observer(.completed)
+            })
+            return Disposables.create()
+        }
     }
     
 }

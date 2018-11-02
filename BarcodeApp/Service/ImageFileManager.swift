@@ -25,6 +25,10 @@ class ImageFileManager {
         }
     }
     
+    func readImage(with url: URL) -> Data? {
+        return FileManager.default.contents(atPath: url.path)
+    }
+    
     private let userDefaults = UserDefaults.standard
     
     private func getNextCachedName(cachesDirectory: URL, for url: URL) -> URL {
