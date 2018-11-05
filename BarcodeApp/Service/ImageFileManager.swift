@@ -26,7 +26,8 @@ class ImageFileManager {
     }
     
     func readImage(with url: URL) -> Data? {
-        return FileManager.default.contents(atPath: url.path)
+        let localURL = userDefaults.getLocalUrl(for: url)!
+        return FileManager.default.contents(atPath: localURL.path)
     }
     
     private let userDefaults = UserDefaults.standard
