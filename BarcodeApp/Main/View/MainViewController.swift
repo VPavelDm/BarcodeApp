@@ -63,13 +63,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .processed(let count):
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
+            cell.delegate = self
             cell.initCell(barcodeCount: count)
             return cell
         }
     }
 }
 
-extension MainViewController: DownloadCellDelegate, ProcessCellDelegate {
+extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultCellDelegate {
+    func showResultButtonIsClicked(cell: ResultCell) {
+        
+    }
+    
     func processButtonIsClicked(cell: ProcessCell) {
         guard let url = cell.url else { return }
         viewModel.findBarcodes(url: url)
