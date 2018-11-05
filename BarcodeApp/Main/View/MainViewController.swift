@@ -61,10 +61,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.initCell(url: url, indexPath: indexPath)
             return cell
-        case .processed(let count):
+        case .processed(let url, let count):
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
             cell.delegate = self
-            cell.initCell(barcodeCount: count)
+            cell.initCell(url: url, barcodeCount: count)
             return cell
         }
     }
@@ -73,6 +73,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultCellDelegate {
     func showResultButtonIsClicked(cell: ResultCell) {
         let barcodeDescriptionViewController = BarcodeDescriptionViewController.createViewController(asClass: BarcodeDescriptionViewController.self)
+        barcodeDescriptionViewController.url = cell.url
         present(barcodeDescriptionViewController, animated: true)
     }
     

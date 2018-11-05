@@ -44,6 +44,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xQ5-gE-UwH"/>
                     </view>
+                    <connections>
+                        <outlet property="image" destination="K8e-iN-aZv" id="bdH-Fh-SaF"/>
+                        <outlet property="tableView" destination="7xg-zl-gRu" id="Yas-MD-PJU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tak-BY-Qwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

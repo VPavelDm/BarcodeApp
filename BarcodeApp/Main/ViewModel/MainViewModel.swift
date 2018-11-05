@@ -59,7 +59,7 @@ extension MainViewModel {
                         switch $0.state {
                         case .loaded:       self.cells += [.loaded($0.url)]
                         case .notLoaded:    self.cells += [.notLoaded($0.url)]
-                        case .processed:    self.cells += [.processed($0.barcodes.count)]
+                        case .processed:    self.cells += [.processed($0.url, $0.barcodes.count)]
                         }                        
                     }
                     
@@ -113,7 +113,7 @@ extension MainViewModel {
                                     x2: corners[1].cgPointValue.x.double, y2: corners[1].cgPointValue.y.double,
                                     for: url)
                 }
-                self.changeCellState(oldState: .loaded(url), newState: .processed(barcodes.count), url: url)
+                self.changeCellState(oldState: .loaded(url), newState: .processed(url, barcodes.count), url: url)
                 observer(.completed)
             })
             return Disposables.create()
@@ -131,7 +131,7 @@ extension MainViewModel {
 enum CellViewModel: Equatable {
     case notLoaded(URL)
     case loaded(URL)
-    case processed(Int)
+    case processed(URL, Int)
     
     static func ==(lhs: CellViewModel, rhs: CellViewModel) -> Bool {
         switch (lhs, rhs) {
