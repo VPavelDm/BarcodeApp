@@ -16,6 +16,11 @@
 		102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9872218C432700BA2737 /* BarcodeDAO.swift */; };
 		102A9877218C464800BA2737 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9876218C464800BA2737 /* CGFloat.swift */; };
 		104C23C821877DDC00040DA4 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104C23C721877DDC00040DA4 /* ImageFileManager.swift */; };
+		10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */; };
+		10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */; };
+		10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B392190A81F00BE6A83 /* DetailCell.swift */; };
+		10762B3C2190A81F00BE6A83 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10762B3A2190A81F00BE6A83 /* DetailCell.xib */; };
+		10762B402190A9DA00BE6A83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B3F2190A9DA00BE6A83 /* ViewController.swift */; };
 		1077F9532189C101003B3EC6 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077F9522189C101003B3EC6 /* Download.swift */; };
 		107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C22162189F23000C79AA9 /* UIAlertController.swift */; };
 		107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1D82181D76E001D66D8 /* UITableViewCell.swift */; };
@@ -50,6 +55,11 @@
 		102A9872218C432700BA2737 /* BarcodeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDAO.swift; sourceTree = "<group>"; };
 		102A9876218C464800BA2737 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		104C23C721877DDC00040DA4 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
+		10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewController.swift; sourceTree = "<group>"; };
+		10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarcodeDescriptionViewController.storyboard; sourceTree = "<group>"; };
+		10762B392190A81F00BE6A83 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		10762B3A2190A81F00BE6A83 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		10762B3F2190A9DA00BE6A83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1077F9522189C101003B3EC6 /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		107C22162189F23000C79AA9 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		107CA1D82181D76E001D66D8 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
@@ -90,6 +100,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10762B332190A72E00BE6A83 /* BarcodeDescription */ = {
+			isa = PBXGroup;
+			children = (
+				10762B342190A73C00BE6A83 /* View */,
+			);
+			path = BarcodeDescription;
+			sourceTree = "<group>";
+		};
+		10762B342190A73C00BE6A83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */,
+				10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */,
+				10762B3E2190A84000BE6A83 /* DetailCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		10762B3E2190A84000BE6A83 /* DetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				10762B392190A81F00BE6A83 /* DetailCell.swift */,
+				10762B3A2190A81F00BE6A83 /* DetailCell.xib */,
+			);
+			path = DetailCell;
+			sourceTree = "<group>";
+		};
 		107CA1D62181D757001D66D8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +145,7 @@
 				1011B7F121883F23002BC6E9 /* UserDefaults.swift */,
 				107C22162189F23000C79AA9 /* UIAlertController.swift */,
 				108CE8AA218B07AC003C3335 /* VisionImage.swift */,
+				10762B3F2190A9DA00BE6A83 /* ViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -175,6 +213,7 @@
 				107CA1D62181D757001D66D8 /* Core */,
 				10F1A72D21808B14002A3A3B /* Support File */,
 				1085682E2186F591004DC0F3 /* Service */,
+				10762B332190A72E00BE6A83 /* BarcodeDescription */,
 				FED850FDD9D6F7AC1914230F /* Main */,
 			);
 			path = BarcodeApp;
@@ -323,7 +362,9 @@
 				101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */,
 				10F1A73521809A93002A3A3B /* DownloadCell.xib in Resources */,
 				10F1A72621808A89002A3A3B /* LaunchScreen.storyboard in Resources */,
+				10762B3C2190A81F00BE6A83 /* DetailCell.xib in Resources */,
 				10F1A73A21809BFD002A3A3B /* ProcessCell.xib in Resources */,
+				10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */,
 				10F1A73F21809CED002A3A3B /* ResultCell.xib in Resources */,
 				10F1A72321808A89002A3A3B /* Assets.xcassets in Resources */,
 				1013D8D72183297200C2581C /* Urls.txt in Resources */,
@@ -398,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10762B402190A9DA00BE6A83 /* ViewController.swift in Sources */,
 				107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */,
 				1013D8D9218329FC00C2581C /* String.swift in Sources */,
 				102A9877218C464800BA2737 /* CGFloat.swift in Sources */,
@@ -412,8 +454,10 @@
 				10F1A73E21809CED002A3A3B /* ResultCell.swift in Sources */,
 				1085683321870304004DC0F3 /* URLCastError.swift in Sources */,
 				1011B7F221883F23002BC6E9 /* UserDefaults.swift in Sources */,
+				10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */,
 				108CE8AB218B07AC003C3335 /* VisionImage.swift in Sources */,
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
+				10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */,
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
 				102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */,
 				102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */,

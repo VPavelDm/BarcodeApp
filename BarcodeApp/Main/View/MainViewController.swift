@@ -72,7 +72,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultCellDelegate {
     func showResultButtonIsClicked(cell: ResultCell) {
-        
+        let barcodeDescriptionViewController = BarcodeDescriptionViewController.createViewController(asClass: BarcodeDescriptionViewController.self)
+        present(barcodeDescriptionViewController, animated: true)
     }
     
     func processButtonIsClicked(cell: ProcessCell) {

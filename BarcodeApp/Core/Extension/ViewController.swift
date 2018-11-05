@@ -7,3 +7,15 @@
 //
 
 import Foundation
+import UIKit
+
+extension UIViewController {
+    
+    class func createViewController<Controller>(asClass: Controller.Type) -> Controller {
+        let storyboard = UIStoryboard(name: String(describing: asClass), bundle: nil)
+        let viewController = storyboard.instantiateInitialViewController() as? Controller
+        assert(viewController != nil, "Each ViewController must be initial")
+        return viewController!
+    }
+    
+}
