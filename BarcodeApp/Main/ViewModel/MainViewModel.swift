@@ -52,7 +52,7 @@ extension MainViewModel {
     func getData() -> Completable {
         return Completable.create { [weak self] observer in
             guard let `self` = self else { return Disposables.create() }
-            self.imageProvider.getData()
+            self.imageProvider.getImages()
                 .subscribe { [weak self] images in
                     guard let `self` = self, let images = images.element else { return }
                     images.forEach {

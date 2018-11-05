@@ -11,11 +11,12 @@ import Foundation
 struct Image {
     var url: URL
     var state: ImageState
-    var barcodes: [Barcode] = []
+    var barcodes: [Barcode]
     
-    init(url: URL, state: ImageState) {
+    init(url: URL, state: ImageState, barcodes: [Barcode] = []) {
         self.url = url
         self.state = state
+        self.barcodes = barcodes
     }
 }
 

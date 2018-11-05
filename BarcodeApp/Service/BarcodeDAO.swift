@@ -13,10 +13,6 @@ import UIKit
 class BarcodeDAO {
     
     func save(x1: Double, y1: Double, x2: Double, y2: Double, for url: URL) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
         let leftTopCornerEntity = NSEntityDescription.entity(forEntityName: "LeftTopCorner", in: managedContext)!
         let rightBottomCornerEntity = NSEntityDescription.entity(forEntityName: "RightBottomCorner", in: managedContext)!
         
@@ -40,10 +36,6 @@ class BarcodeDAO {
     }
     
     func getBarcodes() -> [(x1: Double, y1: Double, x2: Double, y2: Double, url: URL)] {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
         let leftTopCornerfetchRequest       = NSFetchRequest<NSManagedObject>(entityName: "LeftTopCorner")
         let rightBottomCornerfetchRequest   = NSFetchRequest<NSManagedObject>(entityName: "RightBottomCorner")
         
@@ -73,6 +65,20 @@ class BarcodeDAO {
         return barcodes
     }
     
+    private lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "BarcodeDataModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                print(error.userInfo)
+            }
+        })
+        return container
+    }()
+    
+    private lazy var managedContext: NSManagedObjectContext = {
+        return persistentContainer.newBackgroundContext()
+    }()
+    
     private func getCoordinates(from object: NSManagedObject) -> (x: Double, y: Double) {
         return (x: getValue(from: object, forKey: "x"), y: getValue(from: object, forKey: "y"))
     }
@@ -80,6 +86,17 @@ class BarcodeDAO {
     private func getValue<Type>(from object: NSManagedObject, forKey: String) -> Type {
         let value = object.value(forKey: forKey) as! Type
         return value
+    }
+    
+    private func saveContext() {
+        if managedContext.hasChanges {
+            do {
+                try managedContext.save()
+            } catch {
+                let nserror = error as NSError
+                print(nserror.userInfo)
+            }
+        }
     }
     
 }

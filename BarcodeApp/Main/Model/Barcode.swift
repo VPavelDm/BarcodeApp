@@ -9,5 +9,6 @@
 import Foundation
 
 struct Barcode {
-    
+    let x1, y1: Double
+    let x2, y2: Double
 }
