@@ -99,8 +99,7 @@ extension MainViewModel {
         return Completable.create { [weak self] observer in
             guard
                 let `self` = self,
-                let localURL = UserDefaults.standard.getLocalUrl(for: url),
-                let imageData = self.imageFileManager.readImage(with: localURL),
+                let imageData = self.imageFileManager.readImage(with: url),
                 let image = VisionImage.create(by: imageData)
                 else { return Disposables.create() }
             self.getBarcodeDetector().detect(in: image, completion: { (barcodes, error) in
