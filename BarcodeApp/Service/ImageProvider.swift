@@ -37,7 +37,7 @@ class ImageProvider {
     }
     
     private func getImages(for urls: [URL]) -> (loaded: [Image], notLoaded: [Image], processed: [Image]) {
-        let loadedURLSet = Set(FileManager.default.getItemsLoadedFromNetwork())
+        let loadedURLSet = urlCache.getCachedItems().toSet
         let processedDictionary = getBarcodesWithTheirUrl()
         let processedURLSet = processedDictionary.map { $0.key }
         let URLSet = Set(urls)
@@ -72,5 +72,7 @@ class ImageProvider {
         
         return result
     }
+    
+    private let urlCache: URLCache = URLCache.instance
     
 }

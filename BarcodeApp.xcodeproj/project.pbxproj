@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		100A093D219425B800E0501B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A093C219425B800E0501B /* FileManager.swift */; };
+		100A09412194511500E0501B /* URLCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A09402194511500E0501B /* URLCache.swift */; };
+		100A0943219454B000E0501B /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0942219454B000E0501B /* Set.swift */; };
+		100A09452194559700E0501B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A09442194559700E0501B /* Array.swift */; };
+		100A094721945BA000E0501B /* URLCacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A094621945BA000E0501B /* URLCacheError.swift */; };
 		1013D8D72183297200C2581C /* Urls.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1013D8D62183297200C2581C /* Urls.txt */; };
 		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
 		101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101C9E5D218AFC7500220594 /* GoogleService-Info.plist */; };
@@ -45,7 +48,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		100A093C219425B800E0501B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		100A09402194511500E0501B /* URLCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCache.swift; sourceTree = "<group>"; };
+		100A0942219454B000E0501B /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		100A09442194559700E0501B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		100A094621945BA000E0501B /* URLCacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCacheError.swift; sourceTree = "<group>"; };
 		1013D8D62183297200C2581C /* Urls.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Urls.txt; sourceTree = "<group>"; };
 		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		101C9E5D218AFC7500220594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -143,7 +149,9 @@
 				107C22162189F23000C79AA9 /* UIAlertController.swift */,
 				108CE8AA218B07AC003C3335 /* VisionImage.swift */,
 				10762B3F2190A9DA00BE6A83 /* ViewController.swift */,
-				100A093C219425B800E0501B /* FileManager.swift */,
+				100A09402194511500E0501B /* URLCache.swift */,
+				100A0942219454B000E0501B /* Set.swift */,
+				100A09442194559700E0501B /* Array.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -181,6 +189,7 @@
 			children = (
 				1085683221870304004DC0F3 /* URLCastError.swift */,
 				101C9E5F218B025A00220594 /* LoadImageError.swift */,
+				100A094621945BA000E0501B /* URLCacheError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -438,11 +447,15 @@
 			files = (
 				10762B402190A9DA00BE6A83 /* ViewController.swift in Sources */,
 				107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */,
+				100A0943219454B000E0501B /* Set.swift in Sources */,
 				1013D8D9218329FC00C2581C /* String.swift in Sources */,
 				102A9877218C464800BA2737 /* CGFloat.swift in Sources */,
 				107CA1E12181DAED001D66D8 /* Image.swift in Sources */,
+				100A09412194511500E0501B /* URLCache.swift in Sources */,
 				10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */,
 				10F1A731218098DA002A3A3B /* MainViewController.swift in Sources */,
+				100A09452194559700E0501B /* Array.swift in Sources */,
+				100A094721945BA000E0501B /* URLCacheError.swift in Sources */,
 				10F1A73421809A93002A3A3B /* DownloadCell.swift in Sources */,
 				1077F9532189C101003B3EC6 /* Download.swift in Sources */,
 				107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */,
@@ -455,7 +468,6 @@
 				10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */,
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
 				102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */,
-				100A093D219425B800E0501B /* FileManager.swift in Sources */,
 				102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */,
 				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
 				101C9E60218B025A00220594 /* LoadImageError.swift in Sources */,

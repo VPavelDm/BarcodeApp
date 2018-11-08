@@ -13,9 +13,8 @@ class ImageLoader: NSObject {
     
     override init() {
         super.init()
-        let urlCache = URLCache(memoryCapacity: 100*MB, diskCapacity: 100*MB, diskPath: nil)
         let urlSessionConfiguration = URLSessionConfiguration.default
-        urlSessionConfiguration.urlCache = urlCache
+        urlSessionConfiguration.urlCache = URLCache.instance
         urlSessionConfiguration.httpMaximumConnectionsPerHost = 5
         urlSession = URLSession(configuration: urlSessionConfiguration, delegate: self, delegateQueue: nil)
     }
@@ -36,17 +35,6 @@ class ImageLoader: NSObject {
     
     private var urlSession: URLSession!
     private let progressSubject = PublishSubject<ProgressType>()
-    private let MB = 1024 * 1024
-    
-    private func cacheData(at url: URL, session: URLSession, task: URLSessionDownloadTask) {
-        let data = FileManager.default.contents(atPath: url.path)
-        if let data = data, let response = task.response {
-            let request = URLRequest(url: url)
-            let urlCache = session.configuration.urlCache ?? URLCache.shared
-            let cachedURLResponse = CachedURLResponse(response: response, data: data)
-            urlCache.storeCachedResponse(cachedURLResponse, for: request)
-        }
-    }
     
     private func completeDownloading(url sourceURL: URL) {
         progressSubject.onNext((url: sourceURL, progress: 1.0, error: nil))
@@ -60,12 +48,11 @@ extension ImageLoader: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         guard let sourceURL = downloadTask.originalRequest?.url else { return }
-        do {
-            try FileManager.default.moveItemLoadedFromNetwork(location: location, networkURL: sourceURL)
-            cacheData(at: sourceURL, session: session, task: downloadTask)
+        if let urlCache = session.configuration.urlCache {
+            urlCache.cacheData(at: location, task: downloadTask)
             completeDownloading(url: sourceURL)
-        } catch let error {
-            progressSubject.onNext((url: nil, progress: nil, error: error))
+        } else {
+            fatalError("URLCache is not set.")
         }
     }
     

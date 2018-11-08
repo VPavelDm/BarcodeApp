@@ -98,7 +98,7 @@ extension MainViewModel {
         return Completable.create { [weak self] observer in
             guard
                 let `self` = self,
-                let imageData = FileManager.default.readItemLoadedFromNetwork(networkURL: url),
+                let imageData = URLCache.instance.readItem(loadedFrom: url),
                 let image = VisionImage.create(by: imageData)
                 else { return Disposables.create() }
             self.getBarcodeDetector().detect(in: image, completion: { (barcodes, error) in

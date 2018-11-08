@@ -13,7 +13,7 @@ class BarcodeDescriptionViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var image: UIImageView! {
         didSet {
-            if let imageData = FileManager.default.readItemLoadedFromNetwork(networkURL: url) {
+            if let imageData = URLCache.instance.readItem(loadedFrom: url) {
                 image.image = UIImage(data: imageData)
             } else {
                 image.image = UIImage(named: "default")
