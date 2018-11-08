@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		100A093D219425B800E0501B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A093C219425B800E0501B /* FileManager.swift */; };
-		100A093F219429AB00E0501B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A093E219429AB00E0501B /* UserDefaults.swift */; };
 		1013D8D72183297200C2581C /* Urls.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1013D8D62183297200C2581C /* Urls.txt */; };
 		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
 		101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101C9E5D218AFC7500220594 /* GoogleService-Info.plist */; };
@@ -47,7 +46,6 @@
 
 /* Begin PBXFileReference section */
 		100A093C219425B800E0501B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		100A093E219429AB00E0501B /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		1013D8D62183297200C2581C /* Urls.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Urls.txt; sourceTree = "<group>"; };
 		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		101C9E5D218AFC7500220594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 			children = (
 				102A9876218C464800BA2737 /* CGFloat.swift */,
 				107CA1D82181D76E001D66D8 /* UITableViewCell.swift */,
-				100A093E219429AB00E0501B /* UserDefaults.swift */,
 				1013D8D8218329FC00C2581C /* String.swift */,
 				107C22162189F23000C79AA9 /* UIAlertController.swift */,
 				108CE8AA218B07AC003C3335 /* VisionImage.swift */,
@@ -445,7 +442,6 @@
 				102A9877218C464800BA2737 /* CGFloat.swift in Sources */,
 				107CA1E12181DAED001D66D8 /* Image.swift in Sources */,
 				10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */,
-				100A093F219429AB00E0501B /* UserDefaults.swift in Sources */,
 				10F1A731218098DA002A3A3B /* MainViewController.swift in Sources */,
 				10F1A73421809A93002A3A3B /* DownloadCell.swift in Sources */,
 				1077F9532189C101003B3EC6 /* Download.swift in Sources */,

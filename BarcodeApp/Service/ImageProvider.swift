@@ -37,7 +37,7 @@ class ImageProvider {
     }
     
     private func getImages(for urls: [URL]) -> (loaded: [Image], notLoaded: [Image], processed: [Image]) {
-        let loadedURLSet = Set(UserDefaults.standard.getNetworkURLs())
+        let loadedURLSet = Set(FileManager.default.getItemsLoadedFromNetwork())
         let processedDictionary = getBarcodesWithTheirUrl()
         let processedURLSet = processedDictionary.map { $0.key }
         let URLSet = Set(urls)
