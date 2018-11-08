@@ -32,7 +32,6 @@ class MainViewModel {
     private var downloads: [URL: Download] = [:]
     private let imageProvider = ImageProvider()
     private let imageLoader = ImageLoader()
-    private let imageFileManager = ImageFileManager()
     private let disposeBag = DisposeBag()
     
     private func changeCellState(oldState: CellViewModel, newState: CellViewModel, url: URL) {
@@ -82,8 +81,8 @@ extension MainViewModel {
                 guard let `self` = self else { return }
                 self.downloads[url] = nil
                 self.changeCellState(oldState: .notLoaded(url), newState: .loaded(url), url: url)
-                }, onSubscribed: { [weak self] in
-                    self?.imageLoader.downloadImage(with: url)
+            }, onSubscribed: { [weak self] in
+                self?.imageLoader.downloadImage(with: url)
             })
     }
     
@@ -99,7 +98,7 @@ extension MainViewModel {
         return Completable.create { [weak self] observer in
             guard
                 let `self` = self,
-                let imageData = self.imageFileManager.readImage(with: url),
+                let imageData = FileManager.default.readItemLoadedFromNetwork(networkURL: url),
                 let image = VisionImage.create(by: imageData)
                 else { return Disposables.create() }
             self.getBarcodeDetector().detect(in: image, completion: { (barcodes, error) in
