@@ -19,9 +19,11 @@ class BarcodeDetector {
                 var resultBarcodes: [Barcode] = []
                 if let barcodes = barcodes, error == nil {
                     for barcode in barcodes {
-                        guard let corners = barcode.cornerPoints else { continue }
-                        let barcode = Barcode(x1: corners[0].cgPointValue.x.double, y1: corners[0].cgPointValue.y.double,
-                                              x2: corners[1].cgPointValue.x.double, y2: corners[1].cgPointValue.y.double)
+                        let origin = barcode.frame.origin
+                        let barcode = Barcode(x1: origin.x.double,
+                                              y1: origin.y.double,
+                                              x2: origin.x.double + barcode.frame.width.double,
+                                              y2: origin.y.double + barcode.frame.height.double)
                         resultBarcodes += [barcode]
                     }
                     observer(.success(resultBarcodes))
@@ -35,7 +37,7 @@ class BarcodeDetector {
     
     private func getBarcodeDetector() -> VisionBarcodeDetector {
         let vision = Vision.vision()
-        let barcodeOptions = VisionBarcodeDetectorOptions(formats: [.qrCode])
+        let barcodeOptions = VisionBarcodeDetectorOptions(formats: VisionBarcodeFormat.all)
         return vision.barcodeDetector(options: barcodeOptions)
     }
     

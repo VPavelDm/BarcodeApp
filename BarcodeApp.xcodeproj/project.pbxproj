@@ -23,6 +23,7 @@
 		103CCBFC2195796C00E32B8E /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFB2195796C00E32B8E /* DAO.swift */; };
 		103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */; };
 		103CCC022195A11600E32B8E /* BarcodeDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */; };
+		103CCC052195A93000E32B8E /* ImageDrawService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC042195A93000E32B8E /* ImageDrawService.swift */; };
 		10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */; };
 		10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */; };
 		10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B392190A81F00BE6A83 /* DetailCell.swift */; };
@@ -69,6 +70,7 @@
 		103CCBFB2195796C00E32B8E /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = URLDataModel.xcdatamodel; sourceTree = "<group>"; };
 		103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewModel.swift; sourceTree = "<group>"; };
+		103CCC042195A93000E32B8E /* ImageDrawService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDrawService.swift; sourceTree = "<group>"; };
 		10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewController.swift; sourceTree = "<group>"; };
 		10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarcodeDescriptionViewController.storyboard; sourceTree = "<group>"; };
 		10762B392190A81F00BE6A83 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				102A9872218C432700BA2737 /* BarcodeDAO.swift */,
 				103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */,
 				103CCBFB2195796C00E32B8E /* DAO.swift */,
+				103CCC042195A93000E32B8E /* ImageDrawService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 			files = (
 				10762B402190A9DA00BE6A83 /* ViewController.swift in Sources */,
 				107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */,
+				103CCC052195A93000E32B8E /* ImageDrawService.swift in Sources */,
 				100A0943219454B000E0501B /* Set.swift in Sources */,
 				1013D8D9218329FC00C2581C /* String.swift in Sources */,
 				102A9877218C464800BA2737 /* CGFloat.swift in Sources */,

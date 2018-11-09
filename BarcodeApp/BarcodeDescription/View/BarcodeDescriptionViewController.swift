@@ -60,4 +60,12 @@ extension BarcodeDescriptionViewController: UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let drawService = ImageDrawService()
+        let barcode = viewModel.barcodes[indexPath.row]
+        image.image = drawService.draw(on: image.image!,
+                         leftTopCorner: (x: barcode.x1, y: barcode.y1),
+                         rightBottomCorner: (x: barcode.x2, y: barcode.y2))
+    }
+    
 }
