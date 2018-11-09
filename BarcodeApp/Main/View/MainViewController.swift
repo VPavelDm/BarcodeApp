@@ -74,7 +74,7 @@ extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultC
     func showResultButtonIsClicked(cell: ResultCell) {
         let barcodeDescriptionViewController = BarcodeDescriptionViewController.createViewController(asClass: BarcodeDescriptionViewController.self)
         barcodeDescriptionViewController.url = cell.url
-        present(barcodeDescriptionViewController, animated: true)
+        navigationController?.pushViewController(barcodeDescriptionViewController, animated: true)
     }
     
     func processButtonIsClicked(cell: ProcessCell) {
