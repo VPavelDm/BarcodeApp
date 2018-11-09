@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import Firebase
 
 class MainViewModel {
     
@@ -32,11 +31,11 @@ class MainViewModel {
     private var downloads: [URL: Download] = [:]
     private let imageProvider = ImageProvider()
     private let imageLoader = ImageLoader()
-    private let imageFileManager = ImageFileManager()
+    private let barcodeDetector = BarcodeDetector()
     private let disposeBag = DisposeBag()
     
-    private func changeCellState(oldState: CellViewModel, newState: CellViewModel, url: URL) {
-        self.cells = self.cells.enumerated().map { (index, cell) -> CellViewModel in
+    private func changeCellState(oldState: CellViewModel, newState: CellViewModel) {
+        self.cells = self.cells.map { cell -> CellViewModel in
             if oldState == cell {
                 return newState
             } else {
@@ -81,9 +80,9 @@ extension MainViewModel {
             .do(onCompleted: { [weak self] in
                 guard let `self` = self else { return }
                 self.downloads[url] = nil
-                self.changeCellState(oldState: .notLoaded(url), newState: .loaded(url), url: url)
-                }, onSubscribed: { [weak self] in
-                    self?.imageLoader.downloadImage(with: url)
+                self.changeCellState(oldState: .notLoaded(url), newState: .loaded(url))
+            }, onSubscribed: { [weak self] in
+                self?.imageLoader.downloadImage(with: url)
             })
     }
     
@@ -97,32 +96,19 @@ extension MainViewModel {
     
     func findBarcodes(url: URL) -> Completable {
         return Completable.create { [weak self] observer in
-            guard
-                let `self` = self,
-                let imageData = self.imageFileManager.readImage(with: url),
-                let image = VisionImage.create(by: imageData)
-                else { return Disposables.create() }
-            self.getBarcodeDetector().detect(in: image, completion: { (barcodes, error) in
-                guard error == nil, let barcodes = barcodes else { return }
-                let barcodeDAO = BarcodeDAO()
-                for barcode in barcodes {
-                    guard let corners = barcode.cornerPoints else { continue }
-                    
-                    barcodeDAO.save(x1: corners[0].cgPointValue.x.double, y1: corners[0].cgPointValue.y.double,
-                                    x2: corners[1].cgPointValue.x.double, y2: corners[1].cgPointValue.y.double,
-                                    for: url)
-                }
-                self.changeCellState(oldState: .loaded(url), newState: .processed(url, barcodes.count), url: url)
-                observer(.completed)
-            })
+            guard let `self` = self, let imageData = URLCache.instance.readItem(loadedFrom: url) else { return Disposables.create() }
+            self.barcodeDetector.findBarcodes(with: imageData)
+                .subscribe(onSuccess: { [weak self] (barcodes) in
+                    let dao = BarcodeDAO()
+                    dao.save(barcodes: barcodes, for: url)
+                    self?.changeCellState(oldState: .loaded(url), newState: .processed(url, barcodes.count))
+                    observer(.completed)
+                }, onError: { (error) in
+                    observer(.error(error))
+                })
+                .disposed(by: self.disposeBag)
             return Disposables.create()
         }
-    }
-    
-    private func getBarcodeDetector() -> VisionBarcodeDetector {
-        let vision = Vision.vision()
-        let barcodeOptions = VisionBarcodeDetectorOptions(formats: [.qrCode])
-        return vision.barcodeDetector(options: barcodeOptions)
     }
     
 }

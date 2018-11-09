@@ -10,8 +10,10 @@ import UIKit
 
 class DetailCell: UITableViewCell {
 
-    @IBOutlet private weak var urlLabel: UILabel!
-    @IBOutlet private weak var barcodeCountLabel: UILabel!
+    @IBOutlet private weak var barcodePositionLabel: UILabel!
     
+    func initCell(count: Int) {
+        barcodePositionLabel.text = String(count)
+    }
     
 }

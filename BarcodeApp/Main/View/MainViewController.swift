@@ -74,20 +74,22 @@ extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultC
     func showResultButtonIsClicked(cell: ResultCell) {
         let barcodeDescriptionViewController = BarcodeDescriptionViewController.createViewController(asClass: BarcodeDescriptionViewController.self)
         barcodeDescriptionViewController.url = cell.url
-        present(barcodeDescriptionViewController, animated: true)
+        navigationController?.pushViewController(barcodeDescriptionViewController, animated: true)
     }
     
     func processButtonIsClicked(cell: ProcessCell) {
         guard let url = cell.url else { return }
         viewModel.findBarcodes(url: url)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
             .subscribe(onCompleted: { [weak self] in
                 guard let `self` = self, let indexPath = cell.indexPath else { return }
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            }) { [weak self] (error) in
+            }, onError: { [weak self] (error) in
                 guard let `self` = self else { return }
                 let alert = UIAlertController(with: error)
                 self.present(alert, animated: true)
-            }.disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
     
     func downloadButtonIsClicked(cell: DownloadCell) {
