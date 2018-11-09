@@ -22,6 +22,7 @@
 		103CCBFA219578FB00E32B8E /* CachedURLDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */; };
 		103CCBFC2195796C00E32B8E /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFB2195796C00E32B8E /* DAO.swift */; };
 		103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */; };
+		103CCC022195A11600E32B8E /* BarcodeDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */; };
 		10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */; };
 		10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */; };
 		10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B392190A81F00BE6A83 /* DetailCell.swift */; };
@@ -67,6 +68,7 @@
 		103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedURLDAO.swift; sourceTree = "<group>"; };
 		103CCBFB2195796C00E32B8E /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = URLDataModel.xcdatamodel; sourceTree = "<group>"; };
+		103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewModel.swift; sourceTree = "<group>"; };
 		10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewController.swift; sourceTree = "<group>"; };
 		10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarcodeDescriptionViewController.storyboard; sourceTree = "<group>"; };
 		10762B392190A81F00BE6A83 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -112,10 +114,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		103CCC032195A11900E32B8E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		10762B332190A72E00BE6A83 /* BarcodeDescription */ = {
 			isa = PBXGroup;
 			children = (
 				10762B342190A73C00BE6A83 /* View */,
+				103CCC032195A11900E32B8E /* ViewModel */,
 			);
 			path = BarcodeDescription;
 			sourceTree = "<group>";
@@ -477,6 +488,7 @@
 				10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */,
 				108CE8AB218B07AC003C3335 /* VisionImage.swift in Sources */,
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
+				103CCC022195A11600E32B8E /* BarcodeDescriptionViewModel.swift in Sources */,
 				10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */,
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
 				102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */,

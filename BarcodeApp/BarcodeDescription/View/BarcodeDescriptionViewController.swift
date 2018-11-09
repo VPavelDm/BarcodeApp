@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class BarcodeDescriptionViewController: UIViewController {
 
@@ -24,19 +25,37 @@ class BarcodeDescriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerCells()
+        loadBarcodes()
+    }
+    
+    private func registerCells() {
+        tableView.register(UINib(nibName: DetailCell.identifier, bundle: nil), forCellReuseIdentifier: DetailCell.identifier)        
+    }
+    private func loadBarcodes() {
+        viewModel.loadBarcodes(for: url)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onCompleted: { [weak self] in
+                self?.tableView.reloadData()
+            }).disposed(by: disposeBag)
     }
     
     var url: URL!
+    private let viewModel = BarcodeDescriptionViewModel()
+    private let disposeBag = DisposeBag()
     
 }
 
 extension BarcodeDescriptionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.barcodes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: DetailCell.identifier, for: indexPath) as! DetailCell
+        
+        cell.initCell(count: indexPath.row)
         
         return cell
     }

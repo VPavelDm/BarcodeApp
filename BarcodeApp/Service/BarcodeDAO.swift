@@ -37,12 +37,34 @@ class BarcodeDAO: DAO {
         }
     }
     
+    func getBarcodes(for url: URL) -> [Barcode] {
+        let imageFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ImageEntity")
+        imageFetchRequest.predicate = NSPredicate(format: "%K == %@", "url", url.absoluteString)
+        imageFetchRequest.fetchLimit = 1
+        var barcodes: [Barcode] = []
+        do {
+            let image = try managedContext.fetch(imageFetchRequest).first
+            let barcodesSet = image?.mutableSetValue(forKey: "barcodes")
+            barcodes = barcodesSet?.map { item -> Barcode in
+                let item = item as! NSManagedObject
+                let x1: Double = getValue(from: item, forKey: "x1")
+                let y1: Double = getValue(from: item, forKey: "y1")
+                let x2: Double = getValue(from: item, forKey: "x2")
+                let y2: Double = getValue(from: item, forKey: "y2")
+                return Barcode(x1: x1, y1: y1, x2: x2, y2: y2)
+                } ?? []
+        } catch let error as NSError {
+            print("Can't get barcode's corners: \(error.userInfo)")
+        }
+        return barcodes
+    }
+    
     func getBarcodesWithURL() -> [URL: [Barcode]] {
-        let imageEntity = NSFetchRequest<NSManagedObject>(entityName: "ImageEntity")
+        let imageFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ImageEntity")
 
         var result: [URL: [Barcode]] = [:]
         do {
-            let images = try managedContext.fetch(imageEntity)
+            let images = try managedContext.fetch(imageFetchRequest)
             for image in images {
                 let barcodes = image.mutableSetValue(forKey: "barcodes")
                 let url = URL(string: image.value(forKey: "url") as! String)!
