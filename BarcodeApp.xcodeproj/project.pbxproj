@@ -11,6 +11,7 @@
 		100A0943219454B000E0501B /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0942219454B000E0501B /* Set.swift */; };
 		100A09452194559700E0501B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A09442194559700E0501B /* Array.swift */; };
 		100A094721945BA000E0501B /* URLCacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A094621945BA000E0501B /* URLCacheError.swift */; };
+		100A0949219460E900E0501B /* BarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0948219460E900E0501B /* BarcodeDetector.swift */; };
 		1013D8D72183297200C2581C /* Urls.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1013D8D62183297200C2581C /* Urls.txt */; };
 		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
 		101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101C9E5D218AFC7500220594 /* GoogleService-Info.plist */; };
@@ -52,6 +53,7 @@
 		100A0942219454B000E0501B /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		100A09442194559700E0501B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		100A094621945BA000E0501B /* URLCacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCacheError.swift; sourceTree = "<group>"; };
+		100A0948219460E900E0501B /* BarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDetector.swift; sourceTree = "<group>"; };
 		1013D8D62183297200C2581C /* Urls.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Urls.txt; sourceTree = "<group>"; };
 		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		101C9E5D218AFC7500220594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
 				10856834218704AF004DC0F3 /* ImageLoader.swift */,
 				102A9872218C432700BA2737 /* BarcodeDAO.swift */,
+				100A0948219460E900E0501B /* BarcodeDetector.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */,
 				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
 				101C9E60218B025A00220594 /* LoadImageError.swift in Sources */,
+				100A0949219460E900E0501B /* BarcodeDetector.swift in Sources */,
 				107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

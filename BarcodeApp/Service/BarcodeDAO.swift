@@ -12,57 +12,49 @@ import UIKit
 
 class BarcodeDAO {
     
-    func save(x1: Double, y1: Double, x2: Double, y2: Double, for url: URL) {
-        let leftTopCornerEntity = NSEntityDescription.entity(forEntityName: "LeftTopCorner", in: managedContext)!
-        let rightBottomCornerEntity = NSEntityDescription.entity(forEntityName: "RightBottomCorner", in: managedContext)!
-        
-        let leftTopCorner = NSManagedObject(entity: leftTopCornerEntity, insertInto: managedContext)
-        let rightBottomCorner = NSManagedObject(entity: rightBottomCornerEntity, insertInto: managedContext)
-
-        leftTopCorner.setValue(x1, forKey: "x")
-        leftTopCorner.setValue(y1, forKey: "y")
-        leftTopCorner.setValue(url.absoluteString, forKey: "url")
-        
-        rightBottomCorner.setValue(x2, forKey: "x")
-        rightBottomCorner.setValue(y2, forKey: "y")
-        rightBottomCorner.setValue(url.absoluteString, forKey: "url")
-        
+    func save(barcodes: [Barcode], for url: URL) {
+        let barcodeEntity = NSEntityDescription.entity(forEntityName: "BarcodeEntity", in: managedContext)!
+        let imageEntity = NSEntityDescription.entity(forEntityName: "ImageEntity", in: managedContext)!
+        let image = NSManagedObject(entity: imageEntity, insertInto: managedContext)
+        image.setValue(url.absoluteString, forKey: "url")
+        let imageBarcodes = image.mutableSetValue(forKey: "barcodes")
+        barcodes.forEach {
+            let barcode = NSManagedObject(entity: barcodeEntity, insertInto: managedContext)
+            barcode.setValue($0.x1, forKey: "x1")
+            barcode.setValue($0.y1, forKey: "y1")
+            barcode.setValue($0.x2, forKey: "x2")
+            barcode.setValue($0.y2, forKey: "y2")
+            imageBarcodes.add(barcode)
+        }
         do {
             try managedContext.save()
         } catch let error as NSError {
             print("Can't save: \(error.userInfo)")
         }
-        
     }
     
-    func getBarcodes() -> [(x1: Double, y1: Double, x2: Double, y2: Double, url: URL)] {
-        let leftTopCornerfetchRequest       = NSFetchRequest<NSManagedObject>(entityName: "LeftTopCorner")
-        let rightBottomCornerfetchRequest   = NSFetchRequest<NSManagedObject>(entityName: "RightBottomCorner")
-        
-        var barcodes: [(x1: Double, y1: Double, x2: Double, y2: Double, url: URL)] = []
-        
+    func getBarcodesWithURL() -> [URL: [Barcode]] {
+        let imageEntity = NSFetchRequest<NSManagedObject>(entityName: "ImageEntity")
+
+        var result: [URL: [Barcode]] = [:]
         do {
-            let leftTopCorners      = try managedContext.fetch(leftTopCornerfetchRequest)
-            let rightBottomCorners  = try managedContext.fetch(rightBottomCornerfetchRequest)
-            
-            assert(leftTopCorners.count == rightBottomCorners.count)
-            
-            var i = 0
-            while i < leftTopCorners.count {
-                let leftTopCorner           = getCoordinates(from: leftTopCorners[i])
-                let rightBottomCorner       = getCoordinates(from: rightBottomCorners[i])
-                let leftTopCornerURL:String = getValue(from: leftTopCorners[i], forKey: "url")
-                
-                barcodes += [(x1:   leftTopCorner.x,      y1: leftTopCorner.y,
-                              x2:   rightBottomCorner.x,  y2: rightBottomCorner.y,
-                              url:  URL(string: leftTopCornerURL)!)]
-                
-                i += 1
+            let images = try managedContext.fetch(imageEntity)
+            for image in images {
+                let barcodes = image.mutableSetValue(forKey: "barcodes")
+                let url = URL(string: image.value(forKey: "url") as! String)!
+                result[url] = barcodes.map { item -> Barcode in
+                    let item = item as! NSManagedObject
+                    let x1: Double = getValue(from: item, forKey: "x1")
+                    let y1: Double = getValue(from: item, forKey: "y1")
+                    let x2: Double = getValue(from: item, forKey: "x2")
+                    let y2: Double = getValue(from: item, forKey: "y2")
+                    return Barcode(x1: x1, y1: y1, x2: x2, y2: y2)
+                }
             }
         } catch let error as NSError {
             print("Can't get barcode's corners: \(error.userInfo)")
         }
-        return barcodes
+        return result
     }
     
     private lazy var persistentContainer: NSPersistentContainer = {
@@ -78,10 +70,6 @@ class BarcodeDAO {
     private lazy var managedContext: NSManagedObjectContext = {
         return persistentContainer.newBackgroundContext()
     }()
-    
-    private func getCoordinates(from object: NSManagedObject) -> (x: Double, y: Double) {
-        return (x: getValue(from: object, forKey: "x"), y: getValue(from: object, forKey: "y"))
-    }
     
     private func getValue<Type>(from object: NSManagedObject, forKey: String) -> Type {
         let value = object.value(forKey: forKey) as! Type

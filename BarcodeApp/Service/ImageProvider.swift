@@ -51,26 +51,7 @@ class ImageProvider {
     
     private func getBarcodesWithTheirUrl() -> [URL: [Barcode]] {
         let barcodeDAO = BarcodeDAO()
-        var result: [URL: [Barcode]] = [:]
-        barcodeDAO.getBarcodes().forEach { item in
-            let barcode = createBarcode(item)
-            if let _ = result[item.url] {
-                result[item.url]! += [barcode]
-            } else {
-                result[item.url] = [barcode]
-            }
-        }
-        
-        func createBarcode(_ item: (x1: Double, y1: Double, x2: Double, y2: Double, url: URL)) -> Barcode {
-            return Barcode(
-                x1: item.x1,
-                y1: item.y1,
-                x2: item.x2,
-                y2: item.y2
-            )
-        }
-        
-        return result
+        return barcodeDAO.getBarcodesWithURL()
     }
     
     private let urlCache: URLCache = URLCache.instance

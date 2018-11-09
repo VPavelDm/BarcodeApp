@@ -12,6 +12,7 @@ extension URLCache {
     
     func getCachedItems() -> [URL] {
         var urls = UserDefaults.standard.array(forKey: ARRAY_KEY) as? Array<String> ?? []
+        print(urls)
         urls = urls
             .map { URL(string: $0)! }
             .map { URLRequest(url: $0) }

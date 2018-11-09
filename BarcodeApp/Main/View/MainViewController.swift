@@ -80,6 +80,8 @@ extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultC
     func processButtonIsClicked(cell: ProcessCell) {
         guard let url = cell.url else { return }
         viewModel.findBarcodes(url: url)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
             .subscribe(onCompleted: { [weak self] in
                 guard let `self` = self, let indexPath = cell.indexPath else { return }
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
