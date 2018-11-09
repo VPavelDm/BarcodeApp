@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="URLEntity" representedClassName="URLEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="URLEntity" positionX="69.19921875" positionY="-153.078125" width="128" height="58"/>
+    </elements>
+</model>

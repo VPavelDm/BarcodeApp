@@ -19,6 +19,9 @@
 		102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 102A986F218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld */; };
 		102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9872218C432700BA2737 /* BarcodeDAO.swift */; };
 		102A9877218C464800BA2737 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9876218C464800BA2737 /* CGFloat.swift */; };
+		103CCBFA219578FB00E32B8E /* CachedURLDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */; };
+		103CCBFC2195796C00E32B8E /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFB2195796C00E32B8E /* DAO.swift */; };
+		103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */; };
 		10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */; };
 		10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */; };
 		10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B392190A81F00BE6A83 /* DetailCell.swift */; };
@@ -61,6 +64,9 @@
 		102A9870218C3BA100BA2737 /* BarcodeDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarcodeDataModel.xcdatamodel; sourceTree = "<group>"; };
 		102A9872218C432700BA2737 /* BarcodeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDAO.swift; sourceTree = "<group>"; };
 		102A9876218C464800BA2737 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedURLDAO.swift; sourceTree = "<group>"; };
+		103CCBFB2195796C00E32B8E /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
+		103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = URLDataModel.xcdatamodel; sourceTree = "<group>"; };
 		10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewController.swift; sourceTree = "<group>"; };
 		10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarcodeDescriptionViewController.storyboard; sourceTree = "<group>"; };
 		10762B392190A81F00BE6A83 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -181,8 +187,10 @@
 			children = (
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
 				10856834218704AF004DC0F3 /* ImageLoader.swift */,
-				102A9872218C432700BA2737 /* BarcodeDAO.swift */,
 				100A0948219460E900E0501B /* BarcodeDetector.swift */,
+				102A9872218C432700BA2737 /* BarcodeDAO.swift */,
+				103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */,
+				103CCBFB2195796C00E32B8E /* DAO.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -237,6 +245,7 @@
 				10F1A72421808A89002A3A3B /* LaunchScreen.storyboard */,
 				1013D8D62183297200C2581C /* Urls.txt */,
 				102A986F218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld */,
+				103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */,
 			);
 			path = "Support File";
 			sourceTree = "<group>";
@@ -472,7 +481,10 @@
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
 				102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */,
 				102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */,
+				103CCBFC2195796C00E32B8E /* DAO.swift in Sources */,
 				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
+				103CCBFA219578FB00E32B8E /* CachedURLDAO.swift in Sources */,
+				103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */,
 				101C9E60218B025A00220594 /* LoadImageError.swift in Sources */,
 				100A0949219460E900E0501B /* BarcodeDetector.swift in Sources */,
 				107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */,
@@ -678,6 +690,16 @@
 			);
 			currentVersion = 102A9870218C3BA100BA2737 /* BarcodeDataModel.xcdatamodel */;
 			path = BarcodeDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */,
+			);
+			currentVersion = 103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */;
+			path = URLDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

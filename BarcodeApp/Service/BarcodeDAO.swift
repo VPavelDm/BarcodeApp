@@ -10,7 +10,11 @@ import Foundation
 import CoreData
 import UIKit
 
-class BarcodeDAO {
+class BarcodeDAO: DAO {
+    
+    init() {
+        super.init(modelName: "BarcodeDataModel")
+    }
     
     func save(barcodes: [Barcode], for url: URL) {
         let barcodeEntity = NSEntityDescription.entity(forEntityName: "BarcodeEntity", in: managedContext)!
@@ -55,36 +59,6 @@ class BarcodeDAO {
             print("Can't get barcode's corners: \(error.userInfo)")
         }
         return result
-    }
-    
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "BarcodeDataModel")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                print(error.userInfo)
-            }
-        })
-        return container
-    }()
-    
-    private lazy var managedContext: NSManagedObjectContext = {
-        return persistentContainer.newBackgroundContext()
-    }()
-    
-    private func getValue<Type>(from object: NSManagedObject, forKey: String) -> Type {
-        let value = object.value(forKey: forKey) as! Type
-        return value
-    }
-    
-    private func saveContext() {
-        if managedContext.hasChanges {
-            do {
-                try managedContext.save()
-            } catch {
-                let nserror = error as NSError
-                print(nserror.userInfo)
-            }
-        }
     }
     
 }

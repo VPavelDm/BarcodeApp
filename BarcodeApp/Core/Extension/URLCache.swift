@@ -11,15 +11,13 @@ import Foundation
 extension URLCache {
     
     func getCachedItems() -> [URL] {
-        var urls = UserDefaults.standard.array(forKey: ARRAY_KEY) as? Array<String> ?? []
-        print(urls)
-        urls = urls
-            .map { URL(string: $0)! }
+        let urlDAO = CachedURLDAO()
+        let urls = urlDAO.getURLs()
             .map { URLRequest(url: $0) }
             .filter { cachedResponse(for: $0) != nil }
-            .map { $0.url!.absoluteString }
-        UserDefaults.standard.set(urls, forKey: ARRAY_KEY)
-        return urls.map { URL(string: $0)! }
+            .map { $0.url! }
+        urlDAO.saveURLs(urlsToStore: urls)
+        return urls
     }
     
     func readItem(loadedFrom url: URL) -> Data? {
@@ -34,9 +32,8 @@ extension URLCache {
             let cachedURLResponse = CachedURLResponse(response: response, data: data)
             storeCachedResponse(cachedURLResponse, for: request)
             
-            var urls = (UserDefaults.standard.array(forKey: ARRAY_KEY) as? Array<String> ?? []).toSet
-            urls.insert(url.absoluteString)
-            UserDefaults.standard.set(urls.toArray, forKey: ARRAY_KEY)
+            let urlDAO = CachedURLDAO()
+            urlDAO.saveURL(urlToStore: url)
         }
     }
     
