@@ -14,6 +14,20 @@ class MainViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
+    @IBAction func clickResetButton(_ sender: Any) {
+        viewModel.resetData()
+        .observeOn(MainScheduler.instance)
+        .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onCompleted: { [weak self] in
+                self?.tableView.reloadSections(IndexSet(arrayLiteral: 0), with: .automatic)
+            }, onError: { [weak self] (error) in
+                guard let `self` = self else { return }
+                let alert = UIAlertController(with: error)
+                self.present(alert, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCells()

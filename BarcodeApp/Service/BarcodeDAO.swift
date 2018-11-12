@@ -37,6 +37,17 @@ class BarcodeDAO: DAO {
         }
     }
     
+    func removeBarcodes() {
+        let imageFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ImageEntity")
+        do {
+            let images = try managedContext.fetch(imageFetchRequest)
+            images.forEach { managedContext.delete($0) }
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Can't remove barcodes: \(error.userInfo)")
+        }
+    }
+    
     func getBarcodes(for url: URL) -> [Barcode] {
         let imageFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ImageEntity")
         imageFetchRequest.predicate = NSPredicate(format: "%K == %@", "url", url.absoluteString)

@@ -122,6 +122,37 @@ extension MainViewModel {
     
 }
 
+extension MainViewModel {
+    
+    func resetData() -> Completable {
+        return Completable.create { [weak self] observer in
+            guard let `self` = self else { return Disposables.create() }
+            
+            URLCache.instance.removeAllCachedResponses()
+            
+            let cachedURLDao = CachedURLDAO()
+            cachedURLDao.removeURLs()
+            
+            let barcodesDao = BarcodeDAO()
+            barcodesDao.removeBarcodes()
+            
+            self.cells.forEach { cell in
+                switch cell {
+                case .loaded(let url): self.changeCellState(oldState: cell, newState: .notLoaded(url))
+                case .notLoaded(let url): self.changeCellState(oldState: cell, newState: .notLoaded(url))
+                case .processed(let url, _): self.changeCellState(oldState: cell, newState: .notLoaded(url))
+                }
+            }
+            
+            observer(.completed)
+            
+            return Disposables.create()
+        }
+        
+    }
+    
+}
+
 enum CellViewModel: Equatable {
     case notLoaded(URL)
     case loaded(URL)
