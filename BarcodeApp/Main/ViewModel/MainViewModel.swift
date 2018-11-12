@@ -31,7 +31,8 @@ class MainViewModel {
     private var downloads: [URL: Download] = [:]
     private let imageProvider = ImageProvider()
     private let imageLoader = ImageLoader()
-    private let barcodeDetector = BarcodeDetector()
+    private let mlKitBarcodeDetector: BarcodeDetector = MLKitBarcodeDetector()
+    private let coreMLBarcodeDetector: BarcodeDetector = CoreMLBarcodeDetector()
     private let disposeBag = DisposeBag()
     
     private func changeCellState(oldState: CellViewModel, newState: CellViewModel) {
@@ -97,15 +98,15 @@ extension MainViewModel {
     func findBarcodes(for url: URL) -> Completable {
         let settingsHelper = SettingsBundleHelper()
         switch settingsHelper.getMLType() {
-        case .MLKit: return findByMLKit(for: url)
-        case .CoreML: return findByCoreML(for: url)
+        case .MLKit: return findBarcodes(for: url, by: mlKitBarcodeDetector)
+        case .CoreML: return findBarcodes(for: url, by: coreMLBarcodeDetector)
         }
     }
     
-    private func findByMLKit(for url: URL) -> Completable {
+    private func findBarcodes(for url: URL, by detector: BarcodeDetector) -> Completable {
         return Completable.create { [weak self] observer in
             guard let `self` = self, let imageData = URLCache.instance.readItem(loadedFrom: url) else { return Disposables.create() }
-            self.barcodeDetector.findBarcodes(with: imageData)
+            detector.findBarcodes(with: imageData)
                 .subscribe(onSuccess: { [weak self] (barcodes) in
                     let dao = BarcodeDAO()
                     dao.save(barcodes: barcodes, for: url)
@@ -115,13 +116,6 @@ extension MainViewModel {
                         observer(.error(error))
                 })
                 .disposed(by: self.disposeBag)
-            return Disposables.create()
-        }
-    }
-    
-    private func findByCoreML(for url: URL) -> Completable {
-        return Completable.create { observer in
-            
             return Disposables.create()
         }
     }

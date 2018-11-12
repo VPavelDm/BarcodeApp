@@ -11,7 +11,7 @@
 		100A0943219454B000E0501B /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0942219454B000E0501B /* Set.swift */; };
 		100A09452194559700E0501B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A09442194559700E0501B /* Array.swift */; };
 		100A094721945BA000E0501B /* URLCacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A094621945BA000E0501B /* URLCacheError.swift */; };
-		100A0949219460E900E0501B /* BarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0948219460E900E0501B /* BarcodeDetector.swift */; };
+		100A0949219460E900E0501B /* MLKitBarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0948219460E900E0501B /* MLKitBarcodeDetector.swift */; };
 		1013D8D72183297200C2581C /* Urls.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1013D8D62183297200C2581C /* Urls.txt */; };
 		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
 		101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101C9E5D218AFC7500220594 /* GoogleService-Info.plist */; };
@@ -26,6 +26,8 @@
 		103CCC052195A93000E32B8E /* ImageDrawService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC042195A93000E32B8E /* ImageDrawService.swift */; };
 		10655CF72199611A002FC274 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 10655CF62199611A002FC274 /* Settings.bundle */; };
 		10655CF92199614B002FC274 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10655CF82199614B002FC274 /* SettingsBundleHelper.swift */; };
+		10655CFB219975A3002FC274 /* CoreMLBarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10655CFA219975A3002FC274 /* CoreMLBarcodeDetector.swift */; };
+		10655CFD219975B4002FC274 /* BarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10655CFC219975B4002FC274 /* BarcodeDetector.swift */; };
 		10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */; };
 		10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */; };
 		10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B392190A81F00BE6A83 /* DetailCell.swift */; };
@@ -60,7 +62,7 @@
 		100A0942219454B000E0501B /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		100A09442194559700E0501B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		100A094621945BA000E0501B /* URLCacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCacheError.swift; sourceTree = "<group>"; };
-		100A0948219460E900E0501B /* BarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDetector.swift; sourceTree = "<group>"; };
+		100A0948219460E900E0501B /* MLKitBarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitBarcodeDetector.swift; sourceTree = "<group>"; };
 		1013D8D62183297200C2581C /* Urls.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Urls.txt; sourceTree = "<group>"; };
 		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		101C9E5D218AFC7500220594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -75,6 +77,8 @@
 		103CCC042195A93000E32B8E /* ImageDrawService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDrawService.swift; sourceTree = "<group>"; };
 		10655CF62199611A002FC274 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		10655CF82199614B002FC274 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
+		10655CFA219975A3002FC274 /* CoreMLBarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLBarcodeDetector.swift; sourceTree = "<group>"; };
+		10655CFC219975B4002FC274 /* BarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDetector.swift; sourceTree = "<group>"; };
 		10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewController.swift; sourceTree = "<group>"; };
 		10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarcodeDescriptionViewController.storyboard; sourceTree = "<group>"; };
 		10762B392190A81F00BE6A83 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -214,11 +218,13 @@
 			children = (
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
 				10856834218704AF004DC0F3 /* ImageLoader.swift */,
-				100A0948219460E900E0501B /* BarcodeDetector.swift */,
+				100A0948219460E900E0501B /* MLKitBarcodeDetector.swift */,
+				10655CFA219975A3002FC274 /* CoreMLBarcodeDetector.swift */,
 				102A9872218C432700BA2737 /* BarcodeDAO.swift */,
 				103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */,
 				103CCBFB2195796C00E32B8E /* DAO.swift */,
 				103CCC042195A93000E32B8E /* ImageDrawService.swift */,
+				10655CFC219975B4002FC274 /* BarcodeDetector.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -488,6 +494,7 @@
 			files = (
 				10762B402190A9DA00BE6A83 /* ViewController.swift in Sources */,
 				107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */,
+				10655CFD219975B4002FC274 /* BarcodeDetector.swift in Sources */,
 				103CCC052195A93000E32B8E /* ImageDrawService.swift in Sources */,
 				100A0943219454B000E0501B /* Set.swift in Sources */,
 				1013D8D9218329FC00C2581C /* String.swift in Sources */,
@@ -505,6 +512,7 @@
 				10F1A73E21809CED002A3A3B /* ResultCell.swift in Sources */,
 				1085683321870304004DC0F3 /* URLCastError.swift in Sources */,
 				10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */,
+				10655CFB219975A3002FC274 /* CoreMLBarcodeDetector.swift in Sources */,
 				108CE8AB218B07AC003C3335 /* VisionImage.swift in Sources */,
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
 				103CCC022195A11600E32B8E /* BarcodeDescriptionViewModel.swift in Sources */,
@@ -518,7 +526,7 @@
 				103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */,
 				10655CF92199614B002FC274 /* SettingsBundleHelper.swift in Sources */,
 				101C9E60218B025A00220594 /* LoadImageError.swift in Sources */,
-				100A0949219460E900E0501B /* BarcodeDetector.swift in Sources */,
+				100A0949219460E900E0501B /* MLKitBarcodeDetector.swift in Sources */,
 				107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
