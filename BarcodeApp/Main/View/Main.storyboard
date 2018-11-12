@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--BarcodeApp-->
         <scene sceneID="YN6-ZC-eNG">
             <objects>
                 <viewController id="xXU-M5-Eyw" customClass="MainViewController" customModule="BarcodeApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xww-94-Xrw"/>
                     </view>
-                    <navigationItem key="navigationItem" id="q0T-KO-Ft8"/>
+                    <navigationItem key="navigationItem" title="BarcodeApp" id="q0T-KO-Ft8">
+                        <barButtonItem key="rightBarButtonItem" title="Reset" id="B2t-av-ajL"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="uCN-Ie-2mJ" id="w3B-4K-mog"/>
                     </connections>

@@ -94,7 +94,15 @@ extension MainViewModel {
 
 extension MainViewModel {
     
-    func findBarcodes(url: URL) -> Completable {
+    func findBarcodes(for url: URL) -> Completable {
+        let settingsHelper = SettingsBundleHelper()
+        switch settingsHelper.getMLType() {
+        case .MLKit: return findByMLKit(for: url)
+        case .CoreML: return findByCoreML(for: url)
+        }
+    }
+    
+    private func findByMLKit(for url: URL) -> Completable {
         return Completable.create { [weak self] observer in
             guard let `self` = self, let imageData = URLCache.instance.readItem(loadedFrom: url) else { return Disposables.create() }
             self.barcodeDetector.findBarcodes(with: imageData)
@@ -103,10 +111,17 @@ extension MainViewModel {
                     dao.save(barcodes: barcodes, for: url)
                     self?.changeCellState(oldState: .loaded(url), newState: .processed(url, barcodes.count))
                     observer(.completed)
-                }, onError: { (error) in
-                    observer(.error(error))
+                    }, onError: { (error) in
+                        observer(.error(error))
                 })
                 .disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+    }
+    
+    private func findByCoreML(for url: URL) -> Completable {
+        return Completable.create { observer in
+            
             return Disposables.create()
         }
     }

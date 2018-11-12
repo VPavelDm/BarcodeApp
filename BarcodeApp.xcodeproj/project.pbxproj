@@ -24,6 +24,8 @@
 		103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */; };
 		103CCC022195A11600E32B8E /* BarcodeDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */; };
 		103CCC052195A93000E32B8E /* ImageDrawService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC042195A93000E32B8E /* ImageDrawService.swift */; };
+		10655CF72199611A002FC274 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 10655CF62199611A002FC274 /* Settings.bundle */; };
+		10655CF92199614B002FC274 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10655CF82199614B002FC274 /* SettingsBundleHelper.swift */; };
 		10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */; };
 		10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */; };
 		10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B392190A81F00BE6A83 /* DetailCell.swift */; };
@@ -71,6 +73,8 @@
 		103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = URLDataModel.xcdatamodel; sourceTree = "<group>"; };
 		103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewModel.swift; sourceTree = "<group>"; };
 		103CCC042195A93000E32B8E /* ImageDrawService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDrawService.swift; sourceTree = "<group>"; };
+		10655CF62199611A002FC274 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		10655CF82199614B002FC274 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewController.swift; sourceTree = "<group>"; };
 		10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarcodeDescriptionViewController.storyboard; sourceTree = "<group>"; };
 		10762B392190A81F00BE6A83 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		10655CF52199610E002FC274 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				10655CF62199611A002FC274 /* Settings.bundle */,
+				10655CF82199614B002FC274 /* SettingsBundleHelper.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		10762B332190A72E00BE6A83 /* BarcodeDescription */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +168,7 @@
 		107CA1D62181D757001D66D8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				10655CF52199610E002FC274 /* Settings */,
 				10856831218702F8004DC0F3 /* Error */,
 				107CA1D72181D762001D66D8 /* Extension */,
 			);
@@ -399,6 +413,7 @@
 				10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */,
 				10F1A73F21809CED002A3A3B /* ResultCell.xib in Resources */,
 				10F1A72321808A89002A3A3B /* Assets.xcassets in Resources */,
+				10655CF72199611A002FC274 /* Settings.bundle in Resources */,
 				1013D8D72183297200C2581C /* Urls.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +516,7 @@
 				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
 				103CCBFA219578FB00E32B8E /* CachedURLDAO.swift in Sources */,
 				103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */,
+				10655CF92199614B002FC274 /* SettingsBundleHelper.swift in Sources */,
 				101C9E60218B025A00220594 /* LoadImageError.swift in Sources */,
 				100A0949219460E900E0501B /* BarcodeDetector.swift in Sources */,
 				107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */,

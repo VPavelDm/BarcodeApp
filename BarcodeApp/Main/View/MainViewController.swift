@@ -79,7 +79,7 @@ extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultC
     
     func processButtonIsClicked(cell: ProcessCell) {
         guard let url = cell.url else { return }
-        viewModel.findBarcodes(url: url)
+        viewModel.findBarcodes(for: url)
             .observeOn(MainScheduler.instance)
             .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
             .subscribe(onCompleted: { [weak self] in
