@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BarcodeApp/Core/Extension/URLCache.swift"
-            timestampString = "563703421.7343791"
+            timestampString = "563704410.214088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "cacheData(at:task:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BarcodeApp/Service/CachedURLDAO.swift"
-            timestampString = "563703467.550543"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "getURLs()"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "getCachedItems()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

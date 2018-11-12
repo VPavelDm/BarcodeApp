@@ -28,8 +28,38 @@ class CachedURLDAO: DAO {
         }
     }
     
+    func replaceURLs(newURLs: [URL]) {
+        removeURLs()
+        saveURLs(urlsToStore: newURLs)
+    }
+    
+    func removeURLs() {
+        let urlEntity = NSFetchRequest<NSManagedObject>(entityName: "URLEntity")
+        var urls: [NSManagedObject] = []
+        do {
+            urls = try managedContext.fetch(urlEntity)
+        } catch let error as NSError {
+            print("Can't get urls: \(error.userInfo)")
+        }
+        urls.forEach {
+            managedContext.delete($0)
+        }
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Can't save: \(error.userInfo)")
+        }
+    }
+    
     func saveURL(urlToStore: URL) {
-        saveURLs(urlsToStore: [urlToStore])
+        let urlEntity = NSEntityDescription.entity(forEntityName: "URLEntity", in: managedContext)!
+        let urlObject = NSManagedObject(entity: urlEntity, insertInto: managedContext)
+        urlObject.setValue(urlToStore.absoluteString, forKey: "path")
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Can't save: \(error.userInfo)")
+        }
     }
     
     func getURLs() -> [URL] {

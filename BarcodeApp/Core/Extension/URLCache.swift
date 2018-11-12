@@ -16,7 +16,7 @@ extension URLCache {
             .map { URLRequest(url: $0) }
             .filter { cachedResponse(for: $0) != nil }
             .map { $0.url! }
-        urlDAO.saveURLs(urlsToStore: urls)
+        urlDAO.replaceURLs(newURLs: urls)
         return urls
     }
     
