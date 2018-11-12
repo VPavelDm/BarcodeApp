@@ -15,7 +15,7 @@ class ImageProvider {
         return Observable.create { [weak self] observer in
             defer { observer.onCompleted() }
             guard let `self` = self else { return Disposables.create() }
-            let urls = self.readFromFile().map{ URL(string: $0)! }
+            let urls = self.readFromFile().compactMap { URL(string: $0) }
             let images = self.getImages(for: urls)
             
             observer.onNext((images.loaded + images.notLoaded + images.processed).sorted(by: { frst, scnd in
