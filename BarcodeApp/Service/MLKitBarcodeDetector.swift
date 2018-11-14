@@ -15,7 +15,9 @@ class MLKitBarcodeDetector: BarcodeDetector {
     func findBarcodes(with imageData: Data) -> Single<[Barcode]> {
         return Single.create { [weak self] observer in
             guard let `self` = self, let image = VisionImage.create(by: imageData) else { return Disposables.create() }
-            self.getBarcodeDetector().detect(in: image, completion: { (barcodes, error) in
+            self.semaphore.wait()
+            sleep(5)
+            self.getBarcodeDetector().detect(in: image, completion: { [unowned self] (barcodes, error) in
                 var resultBarcodes: [Barcode] = []
                 if let barcodes = barcodes, error == nil {
                     for barcode in barcodes {
@@ -30,10 +32,13 @@ class MLKitBarcodeDetector: BarcodeDetector {
                 } else if let error = error {
                     observer(.error(error))
                 }
+                self.semaphore.signal()
             })
             return Disposables.create()
         }
     }
+    
+    private let semaphore = DispatchSemaphore(value: 2)
     
     private func getBarcodeDetector() -> VisionBarcodeDetector {
         let vision = Vision.vision()

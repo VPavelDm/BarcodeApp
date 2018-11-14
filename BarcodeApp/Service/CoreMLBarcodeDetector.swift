@@ -20,7 +20,9 @@ class CoreMLBarcodeDetector: BarcodeDetector {
     func findBarcodes(with imageData: Data) -> Single<[Barcode]> {
         return Single.create { [weak self] observer in
             var resultBarcodes: [Barcode] = []
-            if let detector = self?.detector, let image = self?.convertImage(data: imageData) {
+            if let semaphore = self?.semaphore, let detector = self?.detector, let image = self?.convertImage(data: imageData) {
+                semaphore.wait()
+                sleep(5)
                 let features = detector.features(in: image)
                 for feature in features as! [CIQRCodeFeature] {
                     let barcode = Barcode(x1: feature.topLeft.x.double,
@@ -30,12 +32,14 @@ class CoreMLBarcodeDetector: BarcodeDetector {
                     resultBarcodes += [barcode]
                 }
                 observer(.success(resultBarcodes))
+                semaphore.signal()
             }
             return Disposables.create()
         }
     }
     
     private let detector: CIDetector?
+    private let semaphore = DispatchSemaphore(value: 2)
     
     private func convertImage(data: Data) -> CIImage? {
         return CIImage(data: data)
