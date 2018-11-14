@@ -24,6 +24,7 @@ class ImageLoader: NSObject {
     }
     
     func downloadImage(with url: URL) {
+        semaphore.wait()
         let request = URLRequest(url: url)
         if let urlCache = urlSession.configuration.urlCache, let _ = urlCache.cachedResponse(for: request) {
             completeDownloading(url: url)
@@ -35,6 +36,7 @@ class ImageLoader: NSObject {
     
     private var urlSession: URLSession!
     private let progressSubject = PublishSubject<ProgressType>()
+    private let semaphore = DispatchSemaphore(value: 2)
     
     private func completeDownloading(url sourceURL: URL) {
         progressSubject.onNext((url: sourceURL, progress: 1.0, error: nil))
@@ -54,6 +56,7 @@ extension ImageLoader: URLSessionDownloadDelegate {
         } else {
             fatalError("URLCache is not set.")
         }
+        semaphore.signal()
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
