@@ -22,7 +22,6 @@ class CoreMLBarcodeDetector: BarcodeDetector {
             var resultBarcodes: [Barcode] = []
             if let semaphore = self?.semaphore, let detector = self?.detector, let image = self?.convertImage(data: imageData) {
                 semaphore.wait()
-                sleep(5)
                 let features = detector.features(in: image)
                 for feature in features as! [CIQRCodeFeature] {
                     let barcode = Barcode(x1: feature.topLeft.x.double,
