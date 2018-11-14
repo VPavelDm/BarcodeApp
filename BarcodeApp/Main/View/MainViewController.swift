@@ -47,11 +47,11 @@ class MainViewController: UIViewController {
         viewModel.getData()
             .observeOn(MainScheduler.instance)
             .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
-            .subscribe { [unowned self] _ in
+            .subscribe(onCompleted: {
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
                 self.tableView.reloadData()
-            }
+            })
             .disposed(by: disposeBag)
     }
 
@@ -59,26 +59,26 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.cells.count
+        return viewModel.imageCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = viewModel.cells[indexPath.row]
-        switch cell {
-        case .notLoaded(let url):
+        let position = indexPath.row
+        let url = viewModel.getURL(at: position)
+        if viewModel.isImageNotLoaded(at: position) {
             let cell = tableView.dequeueReusableCell(withIdentifier: DownloadCell.identifier, for: indexPath) as! DownloadCell
             cell.delegate = self
             cell.initCell(url: url, progress: viewModel.getProgress(for: url), indexPath: indexPath)
             return cell
-        case .loaded(let url):
+        } else if viewModel.isImageLoaded(at: position) {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProcessCell.identifier, for: indexPath) as! ProcessCell
             cell.delegate = self
             cell.initCell(url: url, indexPath: indexPath)
             return cell
-        case .processed(let url, let count):
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
             cell.delegate = self
-            cell.initCell(url: url, barcodeCount: count)
+            cell.initCell(url: url, barcodeCount: viewModel.getBarcodeCount(at: position))
             return cell
         }
     }

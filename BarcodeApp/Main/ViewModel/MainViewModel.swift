@@ -11,8 +11,6 @@ import RxSwift
 
 class MainViewModel {
     
-    var cells: [CellViewModel] = []
-    
     init() {
         imageLoader.progressObservable
             .subscribe { [weak self] result in
@@ -28,6 +26,7 @@ class MainViewModel {
             .disposed(by: disposeBag)
     }
     
+    private var images: [Image] = []
     private var downloads: [URL: Download] = [:]
     private let imageProvider = ImageProvider()
     private let imageLoader = ImageLoader()
@@ -35,14 +34,30 @@ class MainViewModel {
     private let coreMLBarcodeDetector: BarcodeDetector = CoreMLBarcodeDetector()
     private let disposeBag = DisposeBag()
     
-    private func changeCellState(oldState: CellViewModel, newState: CellViewModel) {
-        self.cells = self.cells.map { cell -> CellViewModel in
-            if oldState == cell {
-                return newState
-            } else {
-                return cell
-            }
-        }
+}
+
+extension MainViewModel {
+    
+    var imageCount: Int { return images.count }
+    
+    func getURL(at position: Int) -> URL {
+        return images[position].url
+    }
+    
+    func getBarcodeCount(at position: Int) -> Int {
+        return images[position].barcodes.count
+    }
+    
+    func isImageNotLoaded(at position: Int) -> Bool {
+        return images[position].state == .notLoaded
+    }
+    
+    func isImageLoaded(at position: Int) -> Bool {
+        return images[position].state == .loaded
+    }
+    
+    func isImageProcessed(at position: Int) -> Bool {
+        return images[position].state == .processed
     }
     
 }
@@ -55,13 +70,7 @@ extension MainViewModel {
             self.imageProvider.getImages()
                 .subscribe { [weak self] images in
                     guard let `self` = self, let images = images.element else { return }
-                    images.forEach {
-                        switch $0.state {
-                        case .loaded:       self.cells += [.loaded($0.url)]
-                        case .notLoaded:    self.cells += [.notLoaded($0.url)]
-                        case .processed:    self.cells += [.processed($0.url, $0.barcodes.count)]
-                        }                        
-                    }
+                    self.images = images
                     
                     observer(.completed)
                 }
@@ -81,7 +90,7 @@ extension MainViewModel {
             .do(onCompleted: { [weak self] in
                 guard let `self` = self else { return }
                 self.downloads[url] = nil
-                self.changeCellState(oldState: .notLoaded(url), newState: .loaded(url))
+                self.images = self.images.map { Image(url: $0.url, state: .loaded) }
             }, onSubscribed: { [weak self] in
                 self?.imageLoader.downloadImage(with: url)
             })
@@ -107,12 +116,15 @@ extension MainViewModel {
         return Completable.create { [weak self] observer in
             guard let `self` = self, let imageData = URLCache.instance.readItem(loadedFrom: url) else { return Disposables.create() }
             detector.findBarcodes(with: imageData)
-                .subscribe(onSuccess: { [weak self] (barcodes) in
-                    let dao = BarcodeDAO()
-                    dao.save(barcodes: barcodes, for: url)
-                    self?.changeCellState(oldState: .loaded(url), newState: .processed(url, barcodes.count))
-                    observer(.completed)
-                    }, onError: { (error) in
+                .subscribe(onSuccess: { (barcodes) in
+                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                        guard let `self` = self else { return }
+                        let dao = BarcodeDAO()
+                        dao.save(barcodes: barcodes, for: url)
+                        self.images = self.images.map { Image(url: $0.url, state: .processed, barcodes: barcodes) }
+                        observer(.completed)
+                    }
+                }, onError: { (error) in
                         observer(.error(error))
                 })
                 .disposed(by: self.disposeBag)
@@ -136,13 +148,7 @@ extension MainViewModel {
             let barcodesDao = BarcodeDAO()
             barcodesDao.removeBarcodes()
             
-            self.cells.forEach { cell in
-                switch cell {
-                case .loaded(let url): self.changeCellState(oldState: cell, newState: .notLoaded(url))
-                case .notLoaded(let url): self.changeCellState(oldState: cell, newState: .notLoaded(url))
-                case .processed(let url, _): self.changeCellState(oldState: cell, newState: .notLoaded(url))
-                }
-            }
+            self.images = self.images.map { Image(url: $0.url, state: .notLoaded) }
             
             observer(.completed)
             
@@ -151,23 +157,4 @@ extension MainViewModel {
         
     }
     
-}
-
-enum CellViewModel: Equatable {
-    case notLoaded(URL)
-    case loaded(URL)
-    case processed(URL, Int)
-    
-    static func ==(lhs: CellViewModel, rhs: CellViewModel) -> Bool {
-        switch (lhs, rhs) {
-        case let (.notLoaded(url1), .notLoaded(url2)):
-            return url1 == url2
-        case let (.loaded(url1), .loaded(url2)):
-            return url1 == url2
-        case let (.processed(count1), .processed(count2)):
-            return count1 == count2
-        default:
-            return false
-        }
-    }
 }
