@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A9U-ib-Lke">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Barcode Description View Controller-->
+        <scene sceneID="7tR-pD-SY5">
+            <objects>
+                <viewController id="A9U-ib-Lke" customClass="BarcodeDescriptionViewController" customModule="BarcodeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dc1-LC-rmI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K8e-iN-aZv">
+                                <rect key="frame" x="16" y="36" width="343" height="206"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="K8e-iN-aZv" secondAttribute="height" multiplier="5:3" id="0ip-uL-0Jb"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7xg-zl-gRu">
+                                <rect key="frame" x="16" y="258" width="343" height="393"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="A9U-ib-Lke" id="k8I-0y-HZv"/>
+                                    <outlet property="delegate" destination="A9U-ib-Lke" id="YnC-GD-cED"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xQ5-gE-UwH" firstAttribute="trailing" secondItem="K8e-iN-aZv" secondAttribute="trailing" constant="16" id="6E0-oJ-gfa"/>
+                            <constraint firstItem="K8e-iN-aZv" firstAttribute="leading" secondItem="xQ5-gE-UwH" secondAttribute="leading" constant="16" id="FqX-d6-QLa"/>
+                            <constraint firstItem="xQ5-gE-UwH" firstAttribute="trailing" secondItem="7xg-zl-gRu" secondAttribute="trailing" constant="16" id="Vdl-ZD-c4i"/>
+                            <constraint firstItem="7xg-zl-gRu" firstAttribute="leading" secondItem="xQ5-gE-UwH" secondAttribute="leading" constant="16" id="Xas-ax-yz7"/>
+                            <constraint firstItem="7xg-zl-gRu" firstAttribute="top" secondItem="K8e-iN-aZv" secondAttribute="bottom" constant="16" id="a24-8X-u29"/>
+                            <constraint firstItem="K8e-iN-aZv" firstAttribute="top" secondItem="xQ5-gE-UwH" secondAttribute="top" constant="16" id="dZD-9r-TqD"/>
+                            <constraint firstItem="xQ5-gE-UwH" firstAttribute="bottom" secondItem="7xg-zl-gRu" secondAttribute="bottom" constant="16" id="jLd-Pc-wq7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xQ5-gE-UwH"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="K8e-iN-aZv" id="bdH-Fh-SaF"/>
+                        <outlet property="tableView" destination="7xg-zl-gRu" id="Yas-MD-PJU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tak-BY-Qwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="316" y="-200.14992503748127"/>
+        </scene>
+    </scenes>
+</document>

@@ -13,11 +13,26 @@ class ProcessCell: UITableViewCell {
     @IBOutlet private weak var urlLabel: UILabel!
     
     @IBAction private func clickProcess(_ sender: Any) {
-        
+        delegate?.processButtonIsClicked(cell: self)
     }
     
-    func initCell(url: String) {
-        urlLabel.text = url
+    var url: URL? {
+        if let text = urlLabel.text {
+            return URL(string: text)!
+        } else {
+            return nil
+        }
+    }
+    var indexPath: IndexPath?
+    weak var delegate: ProcessCellDelegate?
+    
+    func initCell(url: URL, indexPath: IndexPath) {
+        urlLabel.text = url.absoluteString
+        self.indexPath = indexPath
     }
     
+}
+
+protocol ProcessCellDelegate: class {
+    func processButtonIsClicked(cell: ProcessCell)
 }

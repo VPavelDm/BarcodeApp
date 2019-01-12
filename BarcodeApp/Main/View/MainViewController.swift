@@ -8,19 +8,30 @@
 
 import UIKit
 import RxSwift
+import Firebase
 
 class MainViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
+    @IBAction func clickResetButton(_ sender: Any) {
+        viewModel.resetData()
+        .observeOn(MainScheduler.instance)
+        .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onCompleted: { [weak self] in
+                self?.tableView.reloadSections(IndexSet(arrayLiteral: 0), with: .automatic)
+            }, onError: { [weak self] (error) in
+                guard let `self` = self else { return }
+                let alert = UIAlertController(with: error)
+                self.present(alert, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCells()
         loadImages()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     private let viewModel = MainViewModel()
@@ -33,12 +44,14 @@ class MainViewController: UIViewController {
     }
     
     private func loadImages() {
-        viewModel.dataObservable
-            .subscribe { [unowned self] _ in
+        viewModel.getData()
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onCompleted: {
                 self.tableView.delegate = self
                 self.tableView.dataSource = self
                 self.tableView.reloadData()
-            }
+            })
             .disposed(by: disposeBag)
     }
 
@@ -46,24 +59,71 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.cells.count
+        return viewModel.imageCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = viewModel.cells[indexPath.row]
-        switch cell {
-        case .notLoaded(let url):
+        let position = indexPath.row
+        let url = viewModel.getURL(at: position)
+        if viewModel.isImageNotLoaded(at: position) {
             let cell = tableView.dequeueReusableCell(withIdentifier: DownloadCell.identifier, for: indexPath) as! DownloadCell
-            cell.initCell(url: url)
+            cell.delegate = self
+            cell.initCell(url: url, progress: viewModel.getProgress(for: url), indexPath: indexPath)
             return cell
-        case .loaded(let url):
+        } else if viewModel.isImageLoaded(at: position) {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProcessCell.identifier, for: indexPath) as! ProcessCell
-            cell.initCell(url: url)
+            cell.delegate = self
+            cell.initCell(url: url, indexPath: indexPath)
             return cell
-        case .processed(let count):
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
-            cell.initCell(barcodeCount: count)
+            cell.delegate = self
+            cell.initCell(url: url, barcodeCount: viewModel.getBarcodeCount(at: position))
             return cell
         }
     }
+}
+
+extension MainViewController: DownloadCellDelegate, ProcessCellDelegate, ResultCellDelegate {
+    func showResultButtonIsClicked(cell: ResultCell) {
+        let barcodeDescriptionViewController = BarcodeDescriptionViewController.createViewController(asClass: BarcodeDescriptionViewController.self)
+        barcodeDescriptionViewController.url = cell.url
+        navigationController?.pushViewController(barcodeDescriptionViewController, animated: true)
+    }
+    
+    func processButtonIsClicked(cell: ProcessCell) {
+        guard let url = cell.url else { return }
+        viewModel.findBarcodes(for: url)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onCompleted: { [weak self] in
+                guard let `self` = self, let indexPath = cell.indexPath else { return }
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }, onError: { [weak self] (error) in
+                guard let `self` = self else { return }
+                let alert = UIAlertController(with: error)
+                self.present(alert, animated: true)
+            }).disposed(by: disposeBag)
+    }
+    
+    func downloadButtonIsClicked(cell: DownloadCell) {
+        assert(cell.url != nil && cell.indexPath != nil, "The Cell is not initialized")
+        guard let url = cell.url, let indexPath = cell.indexPath else { return }
+        viewModel.loadImage(url: url)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+            .subscribe(onNext: { [weak self] (progress) in
+                guard let `self` = self, let cell = self.tableView.cellForRow(at: indexPath) as? DownloadCell else { return }
+                cell.progressView.progress = progress
+            }, onError: { [weak self] (error) in
+                guard let `self` = self else { return }
+                let alert = UIAlertController(with: error)
+                self.present(alert, animated: true)
+            }, onCompleted: { [weak self] in
+                guard let `self` = self, let indexPath = cell.indexPath else { return }
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            })
+            .disposed(by: disposeBag)
+    }
+    
 }

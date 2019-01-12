@@ -7,13 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		100A09412194511500E0501B /* URLCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A09402194511500E0501B /* URLCache.swift */; };
+		100A0943219454B000E0501B /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0942219454B000E0501B /* Set.swift */; };
+		100A09452194559700E0501B /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A09442194559700E0501B /* Array.swift */; };
+		100A094721945BA000E0501B /* URLCacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A094621945BA000E0501B /* URLCacheError.swift */; };
+		100A0949219460E900E0501B /* MLKitBarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A0948219460E900E0501B /* MLKitBarcodeDetector.swift */; };
 		1013D8D72183297200C2581C /* Urls.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1013D8D62183297200C2581C /* Urls.txt */; };
 		1013D8D9218329FC00C2581C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1013D8D8218329FC00C2581C /* String.swift */; };
+		101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 101C9E5D218AFC7500220594 /* GoogleService-Info.plist */; };
+		101C9E60218B025A00220594 /* LoadImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C9E5F218B025A00220594 /* LoadImageError.swift */; };
+		102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 102A986F218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld */; };
+		102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9872218C432700BA2737 /* BarcodeDAO.swift */; };
+		102A9877218C464800BA2737 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A9876218C464800BA2737 /* CGFloat.swift */; };
+		103CCBFA219578FB00E32B8E /* CachedURLDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */; };
+		103CCBFC2195796C00E32B8E /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFB2195796C00E32B8E /* DAO.swift */; };
+		103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */; };
+		103CCC022195A11600E32B8E /* BarcodeDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */; };
+		103CCC052195A93000E32B8E /* ImageDrawService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103CCC042195A93000E32B8E /* ImageDrawService.swift */; };
+		10655CF72199611A002FC274 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 10655CF62199611A002FC274 /* Settings.bundle */; };
+		10655CF92199614B002FC274 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10655CF82199614B002FC274 /* SettingsBundleHelper.swift */; };
+		10655CFB219975A3002FC274 /* CoreMLBarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10655CFA219975A3002FC274 /* CoreMLBarcodeDetector.swift */; };
+		10655CFD219975B4002FC274 /* BarcodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10655CFC219975B4002FC274 /* BarcodeDetector.swift */; };
+		10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */; };
+		10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */; };
+		10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B392190A81F00BE6A83 /* DetailCell.swift */; };
+		10762B3C2190A81F00BE6A83 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10762B3A2190A81F00BE6A83 /* DetailCell.xib */; };
+		10762B402190A9DA00BE6A83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10762B3F2190A9DA00BE6A83 /* ViewController.swift */; };
+		1077F9532189C101003B3EC6 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077F9522189C101003B3EC6 /* Download.swift */; };
+		107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C22162189F23000C79AA9 /* UIAlertController.swift */; };
 		107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1D82181D76E001D66D8 /* UITableViewCell.swift */; };
 		107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DB2181D820001D66D8 /* MainViewModel.swift */; };
 		107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */; };
 		107CA1E12181DAED001D66D8 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1E02181DAED001D66D8 /* Image.swift */; };
 		107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107CA1E42181DB0A001D66D8 /* Barcode.swift */; };
+		1085683321870304004DC0F3 /* URLCastError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1085683221870304004DC0F3 /* URLCastError.swift */; };
+		10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10856834218704AF004DC0F3 /* ImageLoader.swift */; };
+		108CE8AB218B07AC003C3335 /* VisionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108CE8AA218B07AC003C3335 /* VisionImage.swift */; };
 		10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F1A71B21808A88002A3A3B /* AppDelegate.swift */; };
 		10F1A72321808A89002A3A3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10F1A72221808A89002A3A3B /* Assets.xcassets */; };
 		10F1A72621808A89002A3A3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F1A72421808A89002A3A3B /* LaunchScreen.storyboard */; };
@@ -29,13 +58,42 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		100A09402194511500E0501B /* URLCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCache.swift; sourceTree = "<group>"; };
+		100A0942219454B000E0501B /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		100A09442194559700E0501B /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		100A094621945BA000E0501B /* URLCacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCacheError.swift; sourceTree = "<group>"; };
+		100A0948219460E900E0501B /* MLKitBarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitBarcodeDetector.swift; sourceTree = "<group>"; };
 		1013D8D62183297200C2581C /* Urls.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Urls.txt; sourceTree = "<group>"; };
 		1013D8D8218329FC00C2581C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		101C9E5D218AFC7500220594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		101C9E5F218B025A00220594 /* LoadImageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageError.swift; sourceTree = "<group>"; };
+		102A9870218C3BA100BA2737 /* BarcodeDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarcodeDataModel.xcdatamodel; sourceTree = "<group>"; };
+		102A9872218C432700BA2737 /* BarcodeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDAO.swift; sourceTree = "<group>"; };
+		102A9876218C464800BA2737 /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedURLDAO.swift; sourceTree = "<group>"; };
+		103CCBFB2195796C00E32B8E /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
+		103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = URLDataModel.xcdatamodel; sourceTree = "<group>"; };
+		103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewModel.swift; sourceTree = "<group>"; };
+		103CCC042195A93000E32B8E /* ImageDrawService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDrawService.swift; sourceTree = "<group>"; };
+		10655CF62199611A002FC274 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		10655CF82199614B002FC274 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
+		10655CFA219975A3002FC274 /* CoreMLBarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLBarcodeDetector.swift; sourceTree = "<group>"; };
+		10655CFC219975B4002FC274 /* BarcodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDetector.swift; sourceTree = "<group>"; };
+		10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDescriptionViewController.swift; sourceTree = "<group>"; };
+		10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BarcodeDescriptionViewController.storyboard; sourceTree = "<group>"; };
+		10762B392190A81F00BE6A83 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		10762B3A2190A81F00BE6A83 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		10762B3F2190A9DA00BE6A83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1077F9522189C101003B3EC6 /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		107C22162189F23000C79AA9 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		107CA1D82181D76E001D66D8 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		107CA1DB2181D820001D66D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		107CA1E02181DAED001D66D8 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		107CA1E42181DB0A001D66D8 /* Barcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barcode.swift; sourceTree = "<group>"; };
+		1085683221870304004DC0F3 /* URLCastError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCastError.swift; sourceTree = "<group>"; };
+		10856834218704AF004DC0F3 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		108CE8AA218B07AC003C3335 /* VisionImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionImage.swift; sourceTree = "<group>"; };
 		10F1A71821808A88002A3A3B /* BarcodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarcodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10F1A71B21808A88002A3A3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10F1A72221808A89002A3A3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,9 +124,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		103CCC032195A11900E32B8E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				103CCC012195A11600E32B8E /* BarcodeDescriptionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		10655CF52199610E002FC274 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				10655CF62199611A002FC274 /* Settings.bundle */,
+				10655CF82199614B002FC274 /* SettingsBundleHelper.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		10762B332190A72E00BE6A83 /* BarcodeDescription */ = {
+			isa = PBXGroup;
+			children = (
+				10762B342190A73C00BE6A83 /* View */,
+				103CCC032195A11900E32B8E /* ViewModel */,
+			);
+			path = BarcodeDescription;
+			sourceTree = "<group>";
+		};
+		10762B342190A73C00BE6A83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				10762B352190A76000BE6A83 /* BarcodeDescriptionViewController.swift */,
+				10762B372190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard */,
+				10762B3E2190A84000BE6A83 /* DetailCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		10762B3E2190A84000BE6A83 /* DetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				10762B392190A81F00BE6A83 /* DetailCell.swift */,
+				10762B3A2190A81F00BE6A83 /* DetailCell.xib */,
+			);
+			path = DetailCell;
+			sourceTree = "<group>";
+		};
 		107CA1D62181D757001D66D8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				10655CF52199610E002FC274 /* Settings */,
+				10856831218702F8004DC0F3 /* Error */,
 				107CA1D72181D762001D66D8 /* Extension */,
 			);
 			path = Core;
@@ -77,8 +182,15 @@
 		107CA1D72181D762001D66D8 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				102A9876218C464800BA2737 /* CGFloat.swift */,
 				107CA1D82181D76E001D66D8 /* UITableViewCell.swift */,
 				1013D8D8218329FC00C2581C /* String.swift */,
+				107C22162189F23000C79AA9 /* UIAlertController.swift */,
+				108CE8AA218B07AC003C3335 /* VisionImage.swift */,
+				10762B3F2190A9DA00BE6A83 /* ViewController.swift */,
+				100A09402194511500E0501B /* URLCache.swift */,
+				100A0942219454B000E0501B /* Set.swift */,
+				100A09442194559700E0501B /* Array.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -96,16 +208,35 @@
 			children = (
 				107CA1E02181DAED001D66D8 /* Image.swift */,
 				107CA1E42181DB0A001D66D8 /* Barcode.swift */,
+				1077F9522189C101003B3EC6 /* Download.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1085682E2186F591004DC0F3 /* Provider */ = {
+		1085682E2186F591004DC0F3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				107CA1DE2181DAE7001D66D8 /* ImageProvider.swift */,
+				10856834218704AF004DC0F3 /* ImageLoader.swift */,
+				100A0948219460E900E0501B /* MLKitBarcodeDetector.swift */,
+				10655CFA219975A3002FC274 /* CoreMLBarcodeDetector.swift */,
+				102A9872218C432700BA2737 /* BarcodeDAO.swift */,
+				103CCBF9219578FB00E32B8E /* CachedURLDAO.swift */,
+				103CCBFB2195796C00E32B8E /* DAO.swift */,
+				103CCC042195A93000E32B8E /* ImageDrawService.swift */,
+				10655CFC219975B4002FC274 /* BarcodeDetector.swift */,
 			);
-			path = Provider;
+			path = Service;
+			sourceTree = "<group>";
+		};
+		10856831218702F8004DC0F3 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				1085683221870304004DC0F3 /* URLCastError.swift */,
+				101C9E5F218B025A00220594 /* LoadImageError.swift */,
+				100A094621945BA000E0501B /* URLCacheError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		10F1A70F21808A88002A3A3B = {
@@ -132,7 +263,8 @@
 				10F1A72721808A89002A3A3B /* Info.plist */,
 				107CA1D62181D757001D66D8 /* Core */,
 				10F1A72D21808B14002A3A3B /* Support File */,
-				1085682E2186F591004DC0F3 /* Provider */,
+				1085682E2186F591004DC0F3 /* Service */,
+				10762B332190A72E00BE6A83 /* BarcodeDescription */,
 				FED850FDD9D6F7AC1914230F /* Main */,
 			);
 			path = BarcodeApp;
@@ -141,10 +273,13 @@
 		10F1A72D21808B14002A3A3B /* Support File */ = {
 			isa = PBXGroup;
 			children = (
+				101C9E5D218AFC7500220594 /* GoogleService-Info.plist */,
 				10F1A71B21808A88002A3A3B /* AppDelegate.swift */,
 				10F1A72221808A89002A3A3B /* Assets.xcassets */,
 				10F1A72421808A89002A3A3B /* LaunchScreen.storyboard */,
 				1013D8D62183297200C2581C /* Urls.txt */,
+				102A986F218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld */,
+				103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */,
 			);
 			path = "Support File";
 			sourceTree = "<group>";
@@ -276,11 +411,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				10F1A72F2180985F002A3A3B /* Main.storyboard in Resources */,
+				101C9E5E218AFC7500220594 /* GoogleService-Info.plist in Resources */,
 				10F1A73521809A93002A3A3B /* DownloadCell.xib in Resources */,
 				10F1A72621808A89002A3A3B /* LaunchScreen.storyboard in Resources */,
+				10762B3C2190A81F00BE6A83 /* DetailCell.xib in Resources */,
 				10F1A73A21809BFD002A3A3B /* ProcessCell.xib in Resources */,
+				10762B382190A76F00BE6A83 /* BarcodeDescriptionViewController.storyboard in Resources */,
 				10F1A73F21809CED002A3A3B /* ResultCell.xib in Resources */,
 				10F1A72321808A89002A3A3B /* Assets.xcassets in Resources */,
+				10655CF72199611A002FC274 /* Settings.bundle in Resources */,
 				1013D8D72183297200C2581C /* Urls.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,15 +458,27 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BarcodeApp/Pods-BarcodeApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -341,17 +492,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10762B402190A9DA00BE6A83 /* ViewController.swift in Sources */,
 				107CA1DC2181D820001D66D8 /* MainViewModel.swift in Sources */,
+				10655CFD219975B4002FC274 /* BarcodeDetector.swift in Sources */,
+				103CCC052195A93000E32B8E /* ImageDrawService.swift in Sources */,
+				100A0943219454B000E0501B /* Set.swift in Sources */,
 				1013D8D9218329FC00C2581C /* String.swift in Sources */,
+				102A9877218C464800BA2737 /* CGFloat.swift in Sources */,
 				107CA1E12181DAED001D66D8 /* Image.swift in Sources */,
+				100A09412194511500E0501B /* URLCache.swift in Sources */,
 				10F1A71C21808A88002A3A3B /* AppDelegate.swift in Sources */,
 				10F1A731218098DA002A3A3B /* MainViewController.swift in Sources */,
+				100A09452194559700E0501B /* Array.swift in Sources */,
+				100A094721945BA000E0501B /* URLCacheError.swift in Sources */,
 				10F1A73421809A93002A3A3B /* DownloadCell.swift in Sources */,
+				1077F9532189C101003B3EC6 /* Download.swift in Sources */,
 				107CA1DF2181DAE7001D66D8 /* ImageProvider.swift in Sources */,
 				107CA1D92181D76E001D66D8 /* UITableViewCell.swift in Sources */,
 				10F1A73E21809CED002A3A3B /* ResultCell.swift in Sources */,
+				1085683321870304004DC0F3 /* URLCastError.swift in Sources */,
+				10762B3B2190A81F00BE6A83 /* DetailCell.swift in Sources */,
+				10655CFB219975A3002FC274 /* CoreMLBarcodeDetector.swift in Sources */,
+				108CE8AB218B07AC003C3335 /* VisionImage.swift in Sources */,
 				107CA1E52181DB0A001D66D8 /* Barcode.swift in Sources */,
+				103CCC022195A11600E32B8E /* BarcodeDescriptionViewModel.swift in Sources */,
+				10762B362190A76000BE6A83 /* BarcodeDescriptionViewController.swift in Sources */,
 				10F1A73921809BFD002A3A3B /* ProcessCell.swift in Sources */,
+				102A9871218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld in Sources */,
+				102A9873218C432700BA2737 /* BarcodeDAO.swift in Sources */,
+				103CCBFC2195796C00E32B8E /* DAO.swift in Sources */,
+				10856835218704AF004DC0F3 /* ImageLoader.swift in Sources */,
+				103CCBFA219578FB00E32B8E /* CachedURLDAO.swift in Sources */,
+				103CCBFF21957AAE00E32B8E /* URLDataModel.xcdatamodeld in Sources */,
+				10655CF92199614B002FC274 /* SettingsBundleHelper.swift in Sources */,
+				101C9E60218B025A00220594 /* LoadImageError.swift in Sources */,
+				100A0949219460E900E0501B /* MLKitBarcodeDetector.swift in Sources */,
+				107C22172189F23000C79AA9 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +721,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		102A986F218C3BA100BA2737 /* BarcodeDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				102A9870218C3BA100BA2737 /* BarcodeDataModel.xcdatamodel */,
+			);
+			currentVersion = 102A9870218C3BA100BA2737 /* BarcodeDataModel.xcdatamodel */;
+			path = BarcodeDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		103CCBFD21957AAE00E32B8E /* URLDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */,
+			);
+			currentVersion = 103CCBFE21957AAE00E32B8E /* URLDataModel.xcdatamodel */;
+			path = URLDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 10F1A71021808A88002A3A3B /* Project object */;
 }
